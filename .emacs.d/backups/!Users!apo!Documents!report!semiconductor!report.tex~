@@ -1,0 +1,166 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,titlepage]{jsarticle}
+                                \usepackage{caption}
+                \usepackage{url}
+                \usepackage[dvipdfmx]{graphicx}
+\author{小高 拓海}
+\date{\today}
+\title{半導体デバイス 演習問題}
+\begin{document}
+
+\maketitle
+
+\section{有限井戸型ポテンシャル}
+\label{sec:orgf08c846}
+図\ref{fig:org02b0b71}のような有限の井戸型ポテンシャルの中にいる電子について, \(U_0=0.25eV\), \(L=1nm\) のときの電子がとる最低のエネルギEを求めよ. また, \(L=2nm\) になるとエネルギはどうなるか.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=10cm]{./img/no1.jpg}
+\caption{\label{fig:org02b0b71}
+井戸型ポテンシャル}
+\end{figure}
+
+シュレディンガー方程式を考えると, 
+\begin{itemize}
+\item \(-L<x<L\) のとき
+\end{itemize}
+\begin{equation}
+\frac{d^2 \varphi(x)}{dx^2}+k^2\varphi(x) = 0 , k^2 = \frac{2m}{\bar{h}^2}(U_0+L)
+\end{equation}
+\begin{itemize}
+\item \(|x| > L\) のとき
+\end{itemize}
+\begin{equation}
+\frac{d^2 \varphi(x)}{dx^2}-\gamma^2 \varphi(x) = 0 , \gamma^2 = \frac{2m|E|}{\bar{h}^2}
+\end{equation}
+
+となる.
+
+これらの方程式の解は, 積分定数A,B,C,Dを用いて
+
+\begin{equation}
+\varphi = Ae^{jkx} + Be^{-jkx}
+\end{equation}
+\begin{equation}
+\varphi = Ce^{r|x|} + De^{-r|x|}
+\end{equation}
+
+と表せる. これらの定数は
+\begin{itemize}
+\item 波動関数及びその導関数が境界部分(\(x = \pm L\))において連続でなければならない
+\item \(x=\pm \infty\) で波動関数は0になる
+\end{itemize}
+
+という条件で整理していくと
+
+\begin{eqnarray}
+  \left\{
+    \begin{array}{l}
+      2A \cos{kL} = D e^{- \gamma L}\\
+      2kA\sin{kL} = \gamma De^{-\gamma L}
+    \end{array}
+  \right.
+\end{eqnarray}
+
+の連立方程式を解けば全ての定数が求められる. ここで, 今回はエネルギEを求めることが目的であるため, \(k\) と\(\gamma\) に着目し
+
+\begin{equation}
+k \tan{kL} = \gamma
+\end{equation}
+
+の解からエネルギEを求める. ただし, １つの式に対して２変数あるため解析的に解くことは不可能であるため
+
+\begin{equation}
+\tan{\xi} = \frac{\gamma}{k} = \sqrt{\frac{\beta^2}{\xi^2}-1} , \beta^2 = \frac{2mU_0L^2}{\bar{h}^2}
+\end{equation}
+
+のように表して, それらのグラフの交点から解を導く.
+
+グラフを1[ns], 2[ns]のそれぞれ図\ref{fig:orga15fb7e}, \ref{fig:orgfd20c48}に示す.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=10cm]{./img/1ns_1.png}
+\caption{\label{fig:orga15fb7e}
+\(U_0=0.25ev\), \(L=1ns\)}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=10cm]{./img/2ns_1.png}
+\caption{\label{fig:orgfd20c48}
+\(U_0=0.25ev\), \(L=2ns\)}
+\end{figure}
+
+このときエネルギEの増加に伴い\(\xi\) も単調増加するので, \(\xi\) が最も小さい時の交点を求めることで電子の持つ最小エネルギEを求めることができる. \(\xi = kL\) より
+
+\begin{equation}
+E_{min} = \frac{\bar{h}^2}{2mL^2} \xi - U_0
+\end{equation}
+
+である.
+
+L=1[nm]のとき, 一番小さなの交点の値は\(\xi=1.116\) なので, \(E1_{min}=-0.203[eV]\)
+
+L=2[nm]のとき、一番小さなの交点の値は\(\xi=1.312\) なので, \(E2_{min}=-0.234[V]\) となる.
+
+\section{ポテンシャル障壁}
+\label{sec:orgb645563}
+図\ref{fig:orgcf9c669}のようなポテンシャル障壁を考える. 電子が領域Iから領域I\hspace{-.1em}I\hspace{-.1em}Iに向かって移動するときの, ポテンシャル障壁を通り抜ける電子の確率（透過確率）について, \(U_0=0.25eV\), \(L=1nm\) の時の透過確率のグラフを作成せよ. また, \(L=2nm\) の時の透過率のグラフを示せ.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=10cm]{./img/no2.jpg}
+\caption{\label{fig:orgcf9c669}
+ポテンシャル障壁}
+\end{figure}
+
+各領域についてシュレディンガー方程式を考えると
+\begin{itemize}
+\item 領域I, I\hspace{-.1em}I\hspace{-.1em}I
+\end{itemize}
+\begin{equation}
+\frac{d^2 \varphi(x)}{dx^2}+k^2\varphi(x) = 0 , k^2 = \frac{2mE}{\bar{h}^2}
+\end{equation}
+
+\begin{itemize}
+\item 領域I\hspace{-.1em}I
+\end{itemize}
+\begin{equation}
+\frac{d^2 \varphi(x)}{dx^2}-\gamma^2\varphi(x) = 0 , \gamma^2 = \frac{2m}{\bar{h}^2}(U_0 -E)
+\end{equation}
+
+\ref{sec:orgf08c846}と同様に, 波動関数及びその導関数の連続性から定数を求め, 透過確率\(T\) を求めると
+
+\begin{itemize}
+\item \(E<U_0\)
+\end{itemize}
+\begin{equation}
+T = \frac{1}{1+(\frac{k^2+\gamma^2}{2k\gamma})^2 sinh^2{(2\gamma L)}}
+\end{equation}
+\begin{itemize}
+\item \(E>U_0\)
+\end{itemize}
+\begin{equation}
+T = \frac{1}{1+(\frac{k^2+{k'}^2}{2k{k'}})^2 sinh^2{(2{k'} L)}}
+\end{equation}
+
+となる. ただし, \({k'} = \frac{2m}{\bar{h}}(E-U_0)\) である.
+
+グラフを1[ns], 2[ns]のそれぞれ図\ref{fig:orgce9fdac}, \ref{fig:org3a719a8}に示す.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=10cm]{./img/1ns_2.png}
+\caption{\label{fig:orgce9fdac}
+\(U_0=0.25ev\), \(L=1ns\)}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=10cm]{./img/2ns_2.png}
+\caption{\label{fig:org3a719a8}
+\(U_0=0.25ev\), \(L=2ns\)}
+\end{figure}
+\end{document}

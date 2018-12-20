@@ -1,0 +1,11 @@
+﻿\documentclass{jarticle}
+
+\begin{document}
+
+\begin{tabbing}
+\hspace{0.5\textwidth} \= \hspace{0.5\textwidth} \= \kill
+左 \> 真ん中　\> 右 \\
+\end{tabbing}
+123456789 123456789 123456789 123456789 123456789 123456789 123456789 
+あいうえお
+\end{document}

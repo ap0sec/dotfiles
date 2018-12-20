@@ -1,0 +1,21 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,titlepage]{jsarticle}
+                                \usepackage{caption}
+                \usepackage{url}
+                \usepackage[dvipdfmx]{graphicx}
+\author{小高 拓海}
+\date{\today}
+\title{実験x}
+\begin{document}
+
+\maketitle
+あなたのユーザIDを記述してください：
+
+\section{質問1}
+\label{sec:org585edfa}
+所要時間は何分くらいに感じましたか
+
+\section{質問2}
+\label{sec:orgb7c31c0}
+店頭で同様のアンケートの協力を依頼された場合、どうしますか
+\end{document}

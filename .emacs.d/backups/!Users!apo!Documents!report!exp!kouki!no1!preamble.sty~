@@ -1,0 +1,5 @@
+\makeatletter
+\renewcommand{\theequation}{%
+  \thesection.\arabic{equation}}
+\@addtoreset{equation}{section}
+\makeatother

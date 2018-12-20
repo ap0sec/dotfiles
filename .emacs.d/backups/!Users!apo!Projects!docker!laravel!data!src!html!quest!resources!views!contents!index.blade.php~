@@ -1,0 +1,145 @@
+@extends('layouts.app')
+
+@section('content')
+
+    <script>
+     var load;
+     var post;
+
+     window.onload = function(){
+         var date = new Date() ;
+         load = date.getTime() ;
+     }
+
+     function posttime(){
+         var date = new Date() ;
+         post = date.getTime() ;
+         viewtime = post - load;
+         document.answer_form.viewtime.value = viewtime;
+     }
+
+    </script>
+    
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Question</div>
+                    <div class="card-body">
+
+                        <test-component url="{{ $url }}"></test-component>
+
+                        <p>質問</p>
+                        
+                        @if ( $branch )
+                            <p>あなたはりんごが好きですか？（7段階評価）</p>
+                        @else
+                            <p>あなたはみかんが好きですか？（7段階評価）</p>
+                        @endif
+
+                        <form name="answer_form" method="post" action="contents" onsubmit="posttime()">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="id" value="{{ $id }}">
+                            <input type="hidden" name="branch" value="{{ $branch }}">
+                            <input type="hidden" name="time" value={{ $time }}>
+                            <input type="hidden" name="url" value={{ $url }}>
+                            <input type="hidden" name="viewtime" value="">
+
+                            
+                            <div class="form-group">
+                                <div class="form-row">
+                                    <div class="col-md-10">
+                                        <div class="form-row">
+                                            <div class="col-md">
+                                                <div class="container">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="score" id="1" value="1">
+                                                        <label class="form-check-label">1</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md">
+                                                <div class="container">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="score" id="2" value="2">
+                                                        <label class="form-check-label">2</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-md">
+                                                <div class="container">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="score" id="3" value="3">
+                                                        <label class="form-check-label">3</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md">
+                                                <div class="container">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="score" id="4" value="4">
+                                                        <label class="form-check-label">4</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md">
+                                                <div class="container">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="score" id="5" value="5">
+                                                        <label class="form-check-label">5</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md">
+                                                <div class="container">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="score" id="6" value="6">
+                                                        <label class="form-check-label">6</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-md">
+                                                <div class="container">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="score" id="7" value="7">
+                                                        <label class="form-check-label">7</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="submit" class="btn btn-primary">送信</button>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            <div class="form-group">
+                                <div class="form-row">
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control-plaintext" placeholder="すごく嫌い" readonly>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control-plaintext text-center" placeholder="どちらでもない" readonly>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control-plaintext text-center" placeholder="すごく好き" readonly>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

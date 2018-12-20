@@ -1,0 +1,89 @@
+第2回
+
+どれだけ小さな体積をとってもその中には多数の粒子が存在する。  
+よって、内部の相互作用は粒子の考えでは表現しきれない
+
+# 応力(Stress)の概念
+仮想的な面を通して、物体のある部分と他の部分の相互作用の力(ベクトル)として定義
+
+2つの座標系（直交座標系）
+$`(x_1,x_2,x_3),(\bar{x_1},\bar{x_2},\bar{x_3})`$
+
+左から右への座標変換（回転）
+```math
+\bar{x_i} = \sum_{j=1}^{i} \beta_{ij} x_j
+```
+```math
+\beta_{ij} = \cos{(\bar{x_i},x_j)}
+```
+
+```math
+  \left(
+    \begin{array}{c}
+      \bar{x_1} \\
+      \bar{x_2} \\
+    \end{array}
+  \right)
+  
+  =
+  
+  A = \left(
+    \begin{array}{ccc}
+      \cos{\theta} & -\sin{\theta} \\
+      \sin{\theta} & cos{\theta} \\
+    \end{array}
+  \right)
+  
+  \left(
+    \begin{array}{c}
+      x_1 \\
+      x_2 \\
+    \end{array}
+  \right)
+```
+
+## スカラ
+変数$`x_i`$について、ただ１つの成分$`\Phi`$を、また  
+変数$`\bar{x_i}`$について、ただ１つの成分$`\bar{\Phi}`$を持ち  
+対応する点において$`\Phi = \bar{\Phi}`$
+
+```math
+\Phi(x_1,x_2,x_3) = \bar{\Phi}(\bar{x_1},\bar{x_2},\bar{x_3})
+```
+
+## ベクトル
+変数$`x_i`$について、３つの成分$`\xi`$を、また  
+変数$`\bar{x_i}`$について、３つの成分$`\bar{\xi}`$を持ち  
+対応する点において$`\Phi = \bar{\Phi}`$
+
+```math
+\bar{\xi}(\bar{x_1},\bar{x_2},\bar{x_3}) = \xi(x_1,x_2,x_3) \beta_{ik}
+```
+
+## テンソル
+iとjの範囲が１，２，３のとき、９成分を持つ系に拡張
+
+```math
+\bar{t_{ij}}(\bar{x_1},\bar{x_2},\bar{x_3}) = \bar{t_{mn}}(x_1,x_2,x_3) \beta_{im} \beta_{jn}
+```
+
+ある時間に空間を占める体積要素Bを考える
+
+![1.jpg](https://gitlab.com/ap0sec/Note-DJ1/raw/master/strength_of_material/l2/img/1.jpg)
+
+B内に閉曲面Sを考える
+
+![2.jpg](https://gitlab.com/ap0sec/Note-DJ1/raw/master/strength_of_material/l2/img/2.jpg)
+
+Sの表面に微小面積$`\delta`$Sを考える
+
+![3.jpg](https://gitlab.com/ap0sec/Note-DJ1/raw/master/strength_of_material/l2/img/3.jpg)
+
+$`\delta`$Sにはどんな力が働いているのか
+
+![4.jpg](https://gitlab.com/ap0sec/Note-DJ1/raw/master/strength_of_material/l2/img/4.jpg)
+
+$`\delta`$Sを限りなく0にすると  
+$`\frac{\delta F}{\delta S}`$は$`\frac{d\vec{F}}{d\vec{S}}=\vec{T}`$なる力に収束
+
+$`\vec{T}`$はある点の表面力ベクトル あるいは 応力ベクトルと呼ばれる

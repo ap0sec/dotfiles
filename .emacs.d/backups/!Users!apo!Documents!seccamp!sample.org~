@@ -1,0 +1,37 @@
+　4003c0:       48 b8 0f 0e 0d 0b 00    movabs $0xc0601000b0d0e0f,%rax なんかの値
+  4003c7:       01 06 0c
+  4003ca:       83 ff 02                cmp    $0x2,%edi //ediと2を比較 ediは引数1
+  4003cd:       48 89 44 24 f0          mov    %rax,-0x10(%rsp) をスタックへ積む
+  4003d2:       48 b8 04 05 08 0a 02    movabs $0x70903020a080504,%rax なんかの値
+  4003d9:       03 09 07
+  4003dc:       48 89 44 24 f8          mov    %rax,-0x8(%rsp) スタックへ
+  4003e1:       b8 01 00 00 00          mov    $0x1,%eax //eaxに1をセット
+  4003e6:       75 59                   jne    400441 <main+0x81> //ediが2でなければ400441へ つまり第1引数が2でなければジャンプ
+  4003e8:       48 8b 56 08             mov    0x8(%rsi),%rdx //rdx=rsi+8 rsiは第2引数
+  4003ec:       31 c0                   xor    %eax,%eax //ここでeaxを0セット
+  4003ee:       89 c1                   mov    %eax,%ecx //ecx = eax
+  4003f0:       48 ff c0                inc    %rax //raxをインクリメント、よってeaxもインクリメント
+  4003f3:       80 7c 02 ff 00          cmpb   $0x0,-0x1(%rdx,%rax,1) //?
+  4003f8:       75 f4                   jne    4003ee <main+0x2e> //一個上が異なったら4003eeへ
+  4003fa:       83 f9 08                cmp    $0x8,%ecx //ecxが8かどうか //つまり12~15行目が8回繰り返されたかどうか
+  4003fd:       b8 01 00 00 00          mov    $0x1,%eax //eaxに1をセット
+  400402:       75 3d                   jne    400441 <main+0x81> //ecxが8でなければ400441へ つまり12~14行目が8回繰り返されていなければジャンプ
+  400404:       48 8b 32                mov    (%rdx),%rsi //rsi = rdx 10行目でセットした値をrsiに
+  400407:       31 c0                   xor    %eax,%eax //ここでeaxを0セット
+  400409:       30 c9                   xor    %cl,%cl // cl = 0
+  40040b:       48 89 f2                mov    %rsi,%rdx // rdx = rsi //ここへ戻る
+  40040e:       48 d3 ea                shr    %cl,%rdx // rdx = rdx / cl 
+  400411:       83 e2 0f                and    $0xf,%edx // edx & 1111
+  400414:       0f b6 54 14 f0          movzbl -0x10(%rsp,%rdx,1),%edx // edx = $0xc0601000b0d0e0f ?
+  400419:       48 d3 e2                shl    %cl,%rdx // rdx * cl
+  40041c:       83 c1 04                add    $0x4,%ecx //ecx = ecx + 4 
+  40041f:       48 09 d0                or     %rdx,%rax // rax | rdx
+  400422:       83 f9 40                cmp    $0x40,%ecx // ecxが0x40かどうか //つまり22~30が9回繰り返されたかどうか
+  400425:       75 e4                   jne    40040b <main+0x4b> //ecxが0x40でなければ40040bへ //22~30が9回繰り返されたらパス
+  400427:       48 33 05 92 ff ff ff    xor    -0x6e(%rip),%rax        # 4003c0 <main> エントリ
+  40042e:       48 ba 85 03 0e 67 b3    movabs $0x600967b3670e0385,%rdx なんかの値をrdxへ
+  400435:       67 09 60
+  400438:       48 39 d0                cmp    %rdx,%rax //rax と rdx の比較
+  40043b:       0f 95 c0                setne  %al 
+  40043e:       0f b6 c0                movzbl %al,%eax
+  400441:       c3                      retq

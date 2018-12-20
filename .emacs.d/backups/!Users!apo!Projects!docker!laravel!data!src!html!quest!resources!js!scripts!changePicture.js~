@@ -1,0 +1,14 @@
+var img = new Array();
+var cnt=0;
+
+img[0] = new Image();
+img[0].src = "http://quest.localhost/storage/images/{{ $url }}/front";
+img[1] = new Image();
+img[1].src = "http://quest.localhost/storage/images/{{ $url }}/top";
+
+function changeIMG(){
+    cnt++;
+    cnt%=2;
+    
+    document.getElementById("img").src=img[cnt].src;
+}

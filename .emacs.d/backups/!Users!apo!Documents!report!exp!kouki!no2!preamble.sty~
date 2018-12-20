@@ -1,0 +1,14 @@
+\usepackage{listings}
+\lstset{  basicstyle={\ttfamily},  identifierstyle={\small},  commentstyle={\smallitshape},  keywordstyle={\small\bfseries},  ndkeywordstyle={\small},  stringstyle={\small\ttfamily},  frame={tb},  breaklines=true,  columns=[l]{fullflexible},  numbers=left,  xrightmargin=0zw,  xleftmargin=3zw,  numberstyle={\scriptsize},  stepnumber=1,  numbersep=1zw,  lineskip=-0.5ex}
+\makeatletter
+\renewcommand{\thefigure}{\thesection.\arabic{figure}}
+\renewcommand{\theequation}{%
+  \thesection.\arabic{equation}}
+\@addtoreset{figure}{section}
+\@addtoreset{equation}{section}
+\makeatother
+
+\usepackage{fancybox}
+
+\fboxsep=0pt  %画像と枠線をくっつける。
+\fboxrule=1pt %枠線の太さを1ptにする。

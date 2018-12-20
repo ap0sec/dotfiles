@@ -1,0 +1,21 @@
+Host SmartKeyOnRaspberry
+     Hostname 192.168.0.7
+     Port 22
+     User tech
+
+Host PraneServer
+     Hostname prane.biz
+     port 22
+     User prane
+     IdentityFile ~/.ssh/id_rsa
+
+Host JServer
+     Hostname fukuoka.j.kisarazu.ac.jp
+     port 22
+     User sdj18b03
+
+Host AWS
+     Hostname ec2-34-220-243-144.us-west-2.compute.amazonaws.com
+     port 22
+     User ec2-user
+     IdentityFile ~/.ssh/apo.pem     

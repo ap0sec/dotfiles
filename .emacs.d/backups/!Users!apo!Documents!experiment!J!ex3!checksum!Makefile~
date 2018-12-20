@@ -1,0 +1,17 @@
+CFLAGS = -g
+
+LIBS = /home/class/sdj1/jikken/saito/src/libs
+
+BIN =	sample
+
+
+all:	$(BIN)
+
+clean:
+	rm -f *.o
+	rm -f $(BIN)
+
+
+sample:		sample.o \
+		$(LIBS)/pgm.o
+	gcc -o $@ $^

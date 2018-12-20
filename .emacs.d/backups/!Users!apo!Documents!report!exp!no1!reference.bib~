@@ -1,0 +1,19 @@
+@Misc{kv1000,
+  title        = {KV-1000 製品仕様カタログ},
+  howpublished = {https://www.keyence.co.jp/products/controls/plc-building/kv-5000\_3000/models/kv-1000/}
+}
+
+@Misc{fx3s2,
+  title        = {FX3S カタログ},
+  howpublished = {http://www.mitsubishielectric.co.jp/fa/products/faspec/detail.do?kisyu=/plc\_fx&formNm=FX3S CPU}
+}
+
+@Misc{cp1l1,
+  title        = {CP1Lシリーズ カタログ(種類)},
+  howpublished = {https://www.fa.omron.co.jp/products/family/1916/lineup.html/}
+}
+
+@Misc{cp1l2,
+  title        = {CP1Lシリーズ カタログ(定格/性能)},
+  howpublished = {https://www.fa.omron.co.jp/products/family/1916/specification.html/}
+}

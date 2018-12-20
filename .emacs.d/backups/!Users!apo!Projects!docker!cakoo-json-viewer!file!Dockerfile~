@@ -1,0 +1,18 @@
+FROM ubuntu:16.04
+
+MAINTAINER ap0sec <apo.t.laboratory@gmail.com>
+
+RUN apt-get -y update
+RUN apt-get -y install wget mongodb python git
+RUN wget https://bootstrap.pypa.io/get-pip.py
+RUN python get-pip.py
+RUN pip install flask pymongo
+
+EXPOSE 5000
+
+WORKDIR ~/
+
+RUN git clone https://github.com/staybuzz/cuckoo-json-viewer && \
+    cd cuckoo-json-viewer
+
+ENTRYPOINT /bin/bash

@@ -1,0 +1,15 @@
+#!env python
+import struct
+import sys
+
+readsize = 100
+
+with open("sample.docx","rb") as f:
+    infile = f.read(readsize)
+
+
+print(type(infile))
+data = struct.unpack_from('BBBBB',infile)
+
+for i in data:
+    print(hex(i))

@@ -1,0 +1,11 @@
+;;auto-completeの設定ファイル
+
+(require 'auto-complete-config)
+(ac-config-default)
+
+(ac-set-trigger-key "TAB") ;;TABで補完
+(setq ac-use-menu-map t) ;;補完メニュー表示時にC-n/C-pで補完候補選択
+
+;;有効モードの手動追加
+(add-to-list 'ac-modes 'fundamental-mode)  ;; fundamental-mode
+(add-to-list 'ac-modes 'Markdown) ;; markdown-mode

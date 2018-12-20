@@ -1,0 +1,34 @@
+version: "2"
+services:
+  data:
+    container_name: nodejs_data
+    build: ./data
+    volumes:
+      - ./data/src/:/var/www
+      - /var/lib/mysql
+  db:
+    container_name: nodejs_db
+    image: mariadb
+    volumes_from:
+      - data
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+  node:
+    container_name: nodejs_node
+    build: ./node
+    volumes_from:
+      - data
+    privileged: true
+  nginx:
+    container_name: nodejs_nginx
+    build: ./nginx
+    volumes_from:
+      - data
+    ports:
+      - "80:80"
+    privileged: true
+  npm:
+    container_name: nodejs_npm
+    build: ./npm
+    volumes_from:
+      - data

@@ -1,0 +1,23 @@
+version: "2"
+services:
+  data:
+    container_name: test_data
+    build: ./data
+    volumes:
+      - /var/www
+      - /var/lib/mysql
+  db:
+    container_name: test_db
+    image: mariadb
+    volumes_from:
+      - data
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+  nginx:
+    container_name: test_nginx
+    build: ./nginx
+    volumes_from:
+      - data
+    ports:
+      - "80:80"
+    privileged: true

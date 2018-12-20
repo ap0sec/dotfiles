@@ -1,0 +1,28 @@
+第5回
+
+```math
+G(Z) = \frac{b_1}{1-a_1 Z+ a_2+ Z^2}
+```
+
+モデル
+```math
+y(k) = a_1 y(k-1) + a_2 y(k-2) + b_1 u(k-1)
+```
+
+未知パラメータ
+```math
+\theta = (a_1 , a_2 , b_1 )^T
+```
+
+観測ベクトル
+```math
+V_k = [y(k-1),y(k-2),u(k-1)]^T
+```
+
+```math
+{V_k}^T \theta = [y(k-1),y(k-2),u(k-1)] 
+\begin{pmatrix}
+a_1 \\
+a_2 \\
+b_1 
+```

@@ -1,0 +1,47 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateArticlesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('PriStock', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('UserKey');
+            $table->integer('CardKey');
+            $table->integer('State');
+            $table->timestamps();
+        });
+
+        Schema::create('Users', function (Blueprint $table) {
+            $table->increments('UserKey');
+            $table->text('UserID');
+        });
+
+        Schema::create('Cards', function (Blueprint $table) {
+            $table->increments('CardKey');
+            $table->text('CardName');
+        });
+
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('PriStock');
+        Schema::dropIfExists('Users');
+        Schema::dropIfExists('Cards');
+    }
+}

@@ -1,0 +1,32 @@
+:root {
+	--customcolor: #fff;
+}
+
+.site-footer {
+    background: var(--customcolor);
+}
+
+.widget {
+    background: var(--customcolor);
+}
+
+.social-icon {
+    background: var(--customcolor);
+}
+
+.site-header {
+    background: var(--customcolor);
+}
+
+
+.mid-header {
+    background: var(--customcolor);
+}
+
+#primary article, .comments-area {
+    background: var(--customcolor);
+}
+
+.search-no-results #primary {
+    background: var(--customcolor);
+}

@@ -1,0 +1,5 @@
+# Dockerfile for smtp server
+
+FROM centos
+
+RUN yum update && yum install -y \

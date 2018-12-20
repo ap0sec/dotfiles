@@ -1,0 +1,86 @@
+@extends('layouts.public')
+
+
+
+@section('content')
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Start</div>
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-10">
+                                <div class="card mb-5">
+                                    <div class="card-header bg-warning">実験説明</div>
+                                    <div class="card-body">
+                                        <p>ご協力ありがとうございます。</p>
+                                        <p>アンケート開始後、表示される画像を見ながら回答を行ってください。5種類の画像について回答完了した時点で実験は終了となります。</p>
+                                        <p>ブラウザバックを行うと実験は最初からやり直しになりますのでご注意ください。途中までの回答は破棄されます。</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <form method="post" action="/">
+                            {{ csrf_field() }}
+                            <div class="form-group">
+                                
+                                <p class="control-label">年齢</p>
+                                <select class="form-control" name="age" required>
+                                    <option value="">選択してください</option>
+                                    <option value="20歳未満">20歳未満</option>
+                                    <option value="20-29歳">20-29歳</option>
+                                    <option value="30-39歳">30-39歳</option>
+                                    <option value="40-49歳">40-49歳</option>
+                                    <option value="50-59歳">50-59歳</option>
+                                    <option value="60-69歳">60-69歳</option>
+                                    <option value="70-79歳">70-79歳</option>
+                                    <option value="80歳以上">80歳以上</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <p class="control-label">性別</p>
+                                <div class="radio-inline">
+                                    <input type="radio" value="1" name="gender" id="man" required>
+                                    <label for="man">男性</label>
+                                </div>
+                                <div class="radio-inline">
+                                    <input type="radio" value="2" name="gender" id="woman" required>
+                                    <label for="woman">女性</label>
+                                </div>
+                                <div class="radio-inline">
+                                    <input type="radio" value="3" name="gender" id="other" required>
+                                    <label for="woman">その他</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <p class="control-label">あなたは被験者として画像提供を行っていますか？</p>
+                                <div class="radio-inline">
+                                    <input type="radio" value="1" name="pic" id="yes" required>
+                                    <label for="yes">はい</label>
+                                </div>
+                                <div class="radio-inline">
+                                    <input type="radio" value="2" name="pic" id="no" required>
+                                    <label for="no">いいえ</label>
+                                </div>
+                            </div>
+
+                            
+                            <div class="form-group">
+                                <input type="checkbox" name="check" value="1" required>実験同意書（別紙）にサイン済みです
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">アンケート開始</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+@endsection

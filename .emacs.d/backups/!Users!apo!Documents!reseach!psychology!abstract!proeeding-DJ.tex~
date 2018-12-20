@@ -1,0 +1,18 @@
+% Created 2018-12-07 金 13:52
+% Intended LaTeX compiler: pdflatex
+\documentclass[twocolumn, fleqn, uplatex]{jsarticle}
+                
+
+\usepackage{proceeding-DJ}
+\author{小高 拓海}
+\date{再提出期限：2018年12月6日}
+\title{画像処理}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\section{サンプル\}}
+\label{sec:orgb1846b3}
+\end{document}

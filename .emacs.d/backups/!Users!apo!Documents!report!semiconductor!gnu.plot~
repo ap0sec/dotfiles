@@ -1,0 +1,6 @@
+set terminal postscript
+set output "1nm.eps"
+set xrange [0:5]
+set yrange [0:10]
+L = 1
+plot (x * L)

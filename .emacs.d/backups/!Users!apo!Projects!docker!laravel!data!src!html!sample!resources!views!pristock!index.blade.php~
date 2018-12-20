@@ -1,0 +1,9 @@
+@extends('layouts.prichanEx')
+
+@section('title','Index')
+
+@section('contents')
+    <p>{{$items}}
+@endsection
+
+@section('footer','Copylight')

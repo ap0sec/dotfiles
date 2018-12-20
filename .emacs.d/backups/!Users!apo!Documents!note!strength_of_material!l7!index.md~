@@ -1,0 +1,40 @@
+第7回
+
+# 応力とひずみ
++ 応力
+  - 公称応力 $`/Omega_n`$
+  - 真応力 $`/Omega_t`$
++ ひずみ
+  - 公称ひずみ $`e`$
+  - 真ひずみ $`/epsiron`$
+
+変形が小さいときは
+```math
+/Omega_n = /Omega_t  
+e = /epsiron
+```
+
+# 引張試験
+
+材料の特性  
+引張試験
+
+ノート グラフ群（１）
+
+変形が大きくなると差が出る  
+↓  
+$`/Omega_t - /epsiron`$で評価
+
+```math
+/Omega_n = /frac{P}{A_0}  
+/Omega_t = /frac{P}{A}  
+```
+$`A_0`$ : 初期の断面積
+$`A`$ : 初期の断面積
+
+```math
+e = /frac{/lambda}{l_0}  
+/epsiron = /frac{/lambda}{l}  
+```
+$`l_0`$ : 初期の断面積
+$`l`$ : 初期の断面積

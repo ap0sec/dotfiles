@@ -1,0 +1,22 @@
+# Created by newuser for 5.5.1
+export PATH=/usr/local/bin
+export PATH=$PATH:/usr/bin:/bin
+export PATH=$PATH:/usr/local/opt/openssl/bin
+export PATH=$PATH:/usr/local/Homebrew/bin
+export PATH=$PATH:/usr/local/bin
+export PATH=$PATH:/usr/sbin:/sbin
+
+bind '"\C-n": history-search-forward'
+bind '"\C-p": history-search-backward'
+# 上矢印キー
+bind '"\e[A": history-search-backward'
+# 下矢印キー
+bind '"\e[B": history-search-forward'
+
+#emacs daemon時の起動設定
+alias ew="emacsclient -c"
+alias et="emacsclient -t"
+alias ekill="emacsclient -e '(kill-emacs)'"
+
+#gnu coreutilsのalias
+alias ls="gls --color=auto"

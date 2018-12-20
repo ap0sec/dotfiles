@@ -1,0 +1,17 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,titlepage]{jsarticle}
+                                \usepackage{caption}
+                \usepackage{url}
+                \usepackage[dvipdfmx]{graphicx}
+\author{Takumi Odaka}
+\date{\today}
+\title{}
+\begin{document}
+
+
+\section{テスト}
+\label{sec:orgfc02742}
+\begin{equation}
+\frac{p}{1-p}
+\end{equation}
+\end{document}

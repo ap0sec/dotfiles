@@ -1,0 +1,63 @@
+@extends('contents.index')
+
+@section('radio')
+    <form name="answer_form" method="post" action="contents" onsubmit="posttime()">
+        {{ csrf_field() }}
+        <input type="hidden" name="id" value="{{ $id }}">
+        <input type="hidden" name="branch" value="{{ $branch }}">
+        <input type="hidden" name="time" value={{ $time }}>
+        <input type="hidden" name="url" value={{ $url }}>
+        <input type="hidden" name="viewtime" value="">
+
+                
+        <div class="form-group">
+            <div class="form-row">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="score" id="1" value="1">
+                        <label class="form-check-label">1</label>
+                    </div>
+                    <div class="form-check ">
+                        <input class="form-check-input" type="radio" name="score" id="2" value="2">
+                        <label class="form-check-label">2</label>
+                    </div>
+                    <div class="form-check ">
+                        <input class="form-check-input" type="radio" name="score" id="3" value="3">
+                        <label class="form-check-label">3</label>
+                    </div>
+                    <div class="form-check ">
+                        <input class="form-check-input" type="radio" name="score" id="4" value="4">
+                        <label class="form-check-label">4</label>
+                    </div>
+                    <div class="form-check ">
+                        <input class="form-check-input" type="radio" name="score" id="5" value="5">
+                        <label class="form-check-label">5</label>
+                    </div>
+                    <div class="form-check ">
+                        <input class="form-check-input" type="radio" name="score" id="6" value="6">
+                        <label class="form-check-label">6</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="score" id="7" value="7">
+                        <label class="form-check-label">7</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="text" class="form-control-plaintext text-center" placeholder="すごく嫌い" readonly><br>
+                        <input type="text" class="form-control-plaintext text-center" placeholder="どちらでもない" readonly><br>
+                        <input type="text" class="form-control-plaintext text-center" placeholder="すごく好き" readonly>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary">送信</button>
+                </div>
+            </div>
+            
+        </div>
+
+    </form>
+@endsection

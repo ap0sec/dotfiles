@@ -1,0 +1,208 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include "pgm.h"
+
+#define STR_MAX  (100)
+
+void CalcHadamard(int k , float Hk[2*k][2*k]);
+void Sequency(int n, float HN[n][n]);
+void Replace(int n, float HN[n][n],float s[n]);
+void CalcMatrix(int n, int F[n][n],int G[n][n],float HN[n][n]);
+
+int main(int argc, char *argv[])
+{
+
+  srand(0);
+  
+  FILE	*fr, *fw;
+  char  *pname, *fname;
+  int	i, j;
+  int   X_SIZE, Y_SIZE, HIGH;
+  int   *in, *out;
+
+  if (argc - 1 != 1)
+  {
+    fprintf(stderr, "USAGE: %s pgmFile\n", argv[0]);
+    fprintf(stderr, "Read PGM file, and then reverse gray level for each pixel.\n");
+    fprintf(stderr, "The output filename is *_rev.pgm\n");
+    exit(1);
+  }
+
+  pname = (char *)malloc(sizeof(char) * STR_MAX);
+  fname = (char *)malloc(sizeof(char) * STR_MAX);
+
+  for(i=0; i<STR_MAX; i++)
+  {
+    pname[i] = 0;
+    fname[i] = 0;
+  }
+  strncpy(pname, argv[1], strlen(argv[1]));
+  sprintf(fname, "%s", pname);
+  fr = fopen(fname,"r");
+  if (fr == NULL)
+  {
+    printf("ERROR: Can NOT read %s\n", fname);
+    exit(-1);
+  }
+
+  for (i=0; i<STR_MAX; i++)
+  {
+    pname[i] = 0;
+    fname[i] = 0;
+  }
+  strncpy(pname, argv[1], strlen(argv[1])-4);
+  sprintf(fname, "%s_rev.pgm", pname);
+  fw = fopen(fname,"w");
+  if (fw == NULL)
+  {
+    printf("ERROR: Can NOT write %s\n", fname);
+    exit(-1);
+  }
+
+  free(pname);
+  free(fname);
+
+  /* read header */
+  read_pgm(fr, &X_SIZE, &Y_SIZE, &HIGH);
+
+  /* define variable array */
+  in  = (int *)malloc(sizeof(int) * (Y_SIZE+1)*(X_SIZE+1));
+  out = (int *)malloc(sizeof(int) * (Y_SIZE+1)*(X_SIZE+1));
+
+  /* writing header */
+  write_pgm(fw, X_SIZE, Y_SIZE, HIGH);
+  
+  /* read data */
+  for (i=0; i < Y_SIZE; i++)
+  {
+    for(j=0; j < X_SIZE; j++)
+    {
+      in[X_SIZE*(i)+(j)] = getc(fr);
+    }
+  }
+
+  /* processing */
+  int n = X_SIZE;
+  int k = n/2;
+  float HN[X_SIZE][Y_SIZE];
+  CalcHadamard(k,HN);
+  Sequency(n,HN);
+  int F[n][n];
+
+  for(i = 0; i < n; i++){
+    for(j = 0; j < n; j++){
+      F[i][j] = in[i+j*n];
+    }
+  }
+
+  int G[n][n];
+  CalcMatrix(n,F,G,HN);
+  CalcMatrix(n,G,F,HN);
+  
+  for(i = 0; i < n; i++){
+    for(j = 0; j < n; j++){
+      out[i+j*n] = F[i][j];
+    }
+  }
+  
+  /* output */
+  for (i=0; i < Y_SIZE; i++)
+  {
+    for(j=0; j < X_SIZE; j++)
+    {
+      fprintf(fw, "%c", out[X_SIZE*(i)+(j)] );
+    }
+  }
+
+  fclose(fr);
+  fclose(fw);
+
+  free(in);
+  free(out);
+
+  return 0;
+}
+
+void CalcHadamard(int k, float H2k[2*k][2*k])
+{
+  int i,j;
+  
+  if(k == 1){
+    for(i = 0; i < 2; i++){
+      for(j = 0;j < 2 ; j++){
+        H2k[i][j] = 1;
+      }
+      H2k[1][1] = -1;
+    }
+  }
+
+  else{
+    float Hk[k][k];
+    CalcHadamard(k/2 , Hk);
+    for(i = 0;i < 2*k; i++){
+      for(j = 0;j < 2*k ; j++){
+        if(i < k || j < k){
+          H2k[i][j] = Hk[i%k][j%k];
+        }else{
+          H2k[i][j] = -1 * Hk[i%k][j%k];
+        }
+      }
+    }
+  }
+}
+
+void Sequency(int n,float HN[n][n])
+{
+  int i,j;
+  float s[n];
+  for(i = 0; i < n; i++){
+    s[i] = 0;
+    for(j = 0; j < n-1; j++){
+      s[i] += 0.5*abs(HN[i][j] - HN[i][j+1]);
+    }
+  }
+  Replace(n,HN,s);
+}
+
+void Replace(int n,float HN[n][n],float s[n])
+{
+  int i,j;
+  float swap[n][n];
+  for(i = 0; i < n; i++){
+    for(j = 0; j < n; j++){
+      swap[(int)s[i]][j] = HN[i][j];
+    }
+  }
+  
+  for(i = 0; i < n; i++){
+    for(j = 0; j < n; j++){
+      HN[i][j] = swap[i][j];
+    }
+  }
+}
+
+void CalcMatrix(int n,int F[n][n],int G[n][n],float HN[n][n])
+{
+  int buffer[n][n];
+  int i,j,k;
+  for(i = 0; i < n; i++){
+    for(j = 0; j < n; j++){
+      buffer[i][j] = 0;
+      for(k = 0; k < n; k++){
+        buffer[i][j] += ((int)HN[i][k] * F[k][j]);
+      }
+    }
+  }
+  
+  for(i = 0; i < n; i++){
+    for(j = 0; j < n; j++){
+      G[i][j] = 0;
+      for(k = 0; k < n; k++){
+        G[i][j] += buffer[i][k] * HN[j][k];
+      }
+      G[i][j] = (int)(((float)G[i][j]/(float)n)+0.5);
+    }
+  }  
+}

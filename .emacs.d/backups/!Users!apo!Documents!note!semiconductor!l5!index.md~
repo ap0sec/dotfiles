@@ -1,0 +1,42 @@
+第5回
+
+# ボーアの理論
+水素原子のエネルギーを理論的に解明
+
+図(yokobou)
+図(maru)
+
+```math
+v = \frac{q^2}{2\epsiron_0 nh}  
+r = \frac{\epsiron_0 n^2 h^2}{\pi m q^2}  
+  
+\epsiron_0 = 8.85*10^{-12}  
+m = 9.1*10^{-31}  
+q = 1.6*10^{-19}  
+h = 6.63*10^{-34}
+```
+
+## 運動エネルギー
+```math
+K = \frac{1}{2}mv^2  
+  = \frac{mq^2}{8{\epsiron_0}^2 n^2 h^2}
+```
+
+$`n=1`$のとき
+```math
+K=2.165 * 10^{-19} [J]  
+ =13.6 [eV]
+```
+
+## 位置エネルギー
+```math
+U = 0 - \int_r^{\inf} Fdr  
+  = - \frac{q^2}{4\pi \epsiron_0} \int_r^{\inf} \frac{1}{r^2} dr  
+  = - \frac{q^2}{4\pi \epsiron_0} [ - \frac{1}{r} ]_r^{\inf}  
+  = - \frac{q^2}{4\pi \epsiron_0 r}
+  = - \frac{2mq^4}{8\epsiron_0^2 n^2 h^2}
+```
+∴
+```math
+E = - \frac{mq^4}{8\epsiron_0^2 n^2 h^2}
+```

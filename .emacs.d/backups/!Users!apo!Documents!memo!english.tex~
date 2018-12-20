@@ -1,0 +1,82 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,titlepage]{jsarticle}
+                                \usepackage{caption}
+                \usepackage{url}
+                \usepackage[dvipdfmx]{graphicx}
+                \usepackage{titlesec}
+\author{Takumi Odaka}
+\date{\today}
+\title{}
+\begin{document}
+
+\section*{1}
+\label{sec:orgab624b4}
+We will talk the title "We need to know about overseas Internet Slang".
+
+\section*{2}
+\label{sec:org88bd04a}
+What is Internet slang? Do you know?
+
+Internet slang is a collective term for abbreviations used on the Internet that mainly communicate with letters.
+
+It includes emoticons and frank feelings of emotions.
+
+That said, it will be hard to understand without specific examples.
+
+So, let's take a look at some of the Internet slang in Japanese that is familiar to us
+
+\section*{3}
+\label{sec:org73b2748}
+This is just one example of Japanese internet net slang.
+I guess that some of you have people who have seen this.
+
+The first example is "w"
+This represents a laughing appearance.
+It is often used by young people to communicate on SNS.
+
+The next example is "ググる".
+The meaning of this is "Search on google".
+This is also frequently used in our daily lives.
+Have you ever seen such a scene?
+
+Hey you! Do not know how to solve this problem?
+Umm\ldots{} ググれ
+\ldots{}OK\ldots{}
+
+It's very useful.
+
+The last example is "ポチる".
+The meaning of this is "buying in the Internet Store".
+Amazon\ldots{}Rakuten\ldots{}There are plenty of online stores.
+
+Like this Internet Srang is always with you.
+
+This "U" is also one of the net slang.
+
+\section*{4}
+\label{sec:org8196fdc}
+By the way, we are studying English every day.
+Why?
+
+This answer is very simple.
+
+"We want to communicate with foreign people."
+
+\section*{5}
+\label{sec:orgffccdb4}
+What kind of situations?
+
+When traveling abroad?
+I think it is necessary.
+
+When guide someone to the station?
+You are a very kind person.
+
+When attending an international conference?
+It is very wonderful. Please do your best.
+
+but, Not All!!
+
+Internet forum, e - mail, and SNS.
+The scene where we communicate across the Internet is increasing.
+\end{document}

@@ -1,0 +1,39 @@
+#!env python
+import time
+import sys
+import os
+
+
+dataPath = "/Users/apo/Documents/reseach/fs/test/data/"
+sigPath = "/Users/apo/Documents/reseach/fs/test/sig/"
+
+
+readsize = 1320
+loop = 32
+
+while True:
+    files = os.listdir(dataPath)
+    dataFile = [f for f in files if os.path.isfile(os.path.join(dataPath, f))]
+
+
+    for a in dataFile:
+
+        with open(dataPath + a,"rb") as f:
+            infile = f.read(readsize)
+
+        input = infile.hex()
+        output = []
+        
+        for i in range(loop):
+            output.append(input[:5*(i+1)])
+            input = input[5*(i+1):]
+            
+        outfile = ''
+        for i in output:
+            outfile += str(i.count("0")) + ","
+
+        outfile += '\n'
+            
+        with open(sigPath + a + ".sig", "w") as f:
+            f.write(outfile)
+    time.sleep(60)

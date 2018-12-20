@@ -1,0 +1,318 @@
+#+TITLE: 実験3
+#+AUTHOR: 小高 拓海
+#+LATEX_CLASS: jsarticle
+#+OPTIONS: toc:nil timestamp:nil
+
+* 目的
+アナログ増幅回路の基板設計と製作を通じて基板設計および回路シミュレーションの基礎を学ぶことで、回路設計手法についての理解を深めることを目的とする。
+
+* 基礎知識
+** 回路設計（DesignSpark PCB）
+PC上で回路を設計するソフトウェアとして、本実験ではDesignSpark PCBを用いる。DesignSpark PCBはアールエスコンポーネンツ株式会社が無償提供している基板設計ソフトウェアであり、PC上で回路設計が用意に行える機能が多く含まれている。
+
+DesignSpark PCBにおける回路設計は、回路の基本構想を設計する"Schematic Design"、基板上の配線を行う"PCB Design"を組み合わせて行われる。基本的な路設計手順は以下の通りである。
+- a :: "schematic Design"で回路を設計
+- b :: 作成した回路図を元に、"PCB Design"にて実際の基板配線図を作成
+- c :: 配線図をガーバーデータ[fn:1]に変換し、基板加工機で実物を作成
+
+DesignSpark PCBに含まれるライブラリ中には様々な電子部品のデータが存在するが、自分が使いたい部品が存在しない場合もある。その場合、ライブラリにない部品は自分で製作することも可能であり、"Schematic Design"、"PCB Design"のそれぞれで部品データを作成し、紐付けを行うことで実現する。
+
+[fn:1]基板加工機が扱うことのできるデータ形式。"PCB Design"での基板配線図作成時に決定したレイヤ別に出力される。
+
+** 基板加工機
+基板加工機は、ガラスエポキシ板やベークライト板に銅箔が貼られた生基板と呼ばれる基板にエンドミルやドリルを用いて配線加工や穴開けを行い、回路を製作する機械である。ガーバーデータを元に加工順やドリルの種類を指定すると、自動で基板加工を行う。
+
+** 回路シミュレータ（LTspice IV）
+実際に回路を作成する前にシミュレーションを行うことは、結果の予測値を得るだけでなく、設計した回路が意図しない動作をしないかを確認するために非常に有用な手段である。そこで今回は回路シミュレータとして無償で使用可能なLTspice IVを用いて回路シミュレーションを行い、設計した回路に誤りがないかを確認する。LTspice IVは、内蔵されている部品の点数等は少ないが、回路の配線図を作成して周波数特性や過渡応答など様々な回路特性を得ることができる。また、回路の諸特性を入力することで部品を追加することも可能である。
+
+** アナログ増幅回路（エミッタ接地増幅回路）
+トランジスタを用いたアナログ信号増幅回路としてエミッタ接地増幅回路がある。電力利得が大きく、入出力インピーダンスも中程度の特性を有していることから比較的よく使われてきた回路である。回路図を図[[fig:circuit]]に示す。ここでR1とR2は電流帰還バイアス回路であり、このエミッタ接地増幅回路の利得Aは
+\begin{equation}
+A = \frac{V2}{V1} = \frac{R_C}{R_E}
+\end{equation}
+で求めることができる。また、 $C_1$ , $C_2$ は直流分をカットするための結合コンデンサである。
+
+#+CAPTION: エミッタ接地増幅回路
+#+NAME: fig:circuit
+[[./img/circuit.eps]]
+
+* 実験方法
+** 使用機器
+本実験における使用機器を表[[tb:use]]に示す。
+
+#+CAPTION: 使用機器
+#+NAME: tb:use
+#+ATTR_LaTeX: :align |c|c|c|c|
+|----------------------------+----------------+-------------------------+-------------|
+| 機器名                     | メーカー名     | 型番                    | シリアルNo. |
+|----------------------------+----------------+-------------------------+-------------|
+|----------------------------+----------------+-------------------------+-------------|
+| PC                         | HP             | HP ProDesk 400 G2.5 SFF | JPA6957BD8  |
+|----------------------------+----------------+-------------------------+-------------|
+| ファンクションジェネレータ | Agilent        | 33500B Series           | MY53893182  |
+|----------------------------+----------------+-------------------------+-------------|
+| オシロスコープ             | Agilent        | MSO7054B                | MY53320112  |
+|----------------------------+----------------+-------------------------+-------------|
+| 直流安定化電源             | Agilent        | E3631A                  | MY54116041  |
+|----------------------------+----------------+-------------------------+-------------|
+| LCRメーター                | NF Corporation | ZM2372                  | 9111762     |
+|----------------------------+----------------+-------------------------+-------------|
+| 半田付け器具               | -              | -                       | -           |
+|----------------------------+----------------+-------------------------+-------------|
+| 各種電子部品               | -              | -                       | -           |
+|----------------------------+----------------+-------------------------+-------------|
+
+** DesignSpark PCBを用いた基板設計及び基板加工機による基板加工、製作
+*** DesignSpark PCBを用いた回路設計
+DesignSpark PCBを用いて回路を設計する。今回の実験には、10[${\mu}F$]、330[$nF$]の二種類のコンデンサを用意した。入力、出力、電源用端子用の"Schematic Design"、"PCB Design"を自作し、ライブラリ中に含まれるトランジスタ、抵抗、コンデンサと共に用いて回路を設計した。実際に作成した"Schematic Design"を図[[fig:schematic]]、"PCB Design"を図[[fig:pcb]]に示す。
+
+*** 基板加工機による加工
+[[DesignSpark PCBを用いた回路設計]]で設計した回路をガーバーデータに変換し、基板加工機で加工した。この際、パッドの大きさは2.2[mm]、穴の大きさは1.0[mm]で加工を行った。
+
+*** 基板制作
+必要な部品を用意し、抵抗およびコンデンサについては表示値および実測値をLCRメータを用いて計測し、記録を行った。ここで測定した値は、[[LTspice IVを用いた回路シミュレーション]]においてシミュレーションを行う過程で使用する。測定結果を表[[tb:device_value]]に示す。
+加工した基板に各種電子部品等を半田付けし、動作確認を行った。
+
+#+CAPTION: Schematic Design
+#+NAME: fig:schematic
+[[./img/sch.eps]]
+
+#+CAPTION: PCB Design
+#+NAME: fig:pcb
+[[./img/pcb.eps]]
+
+#+CAPTION: 各素子の測定結果
+#+NAME: tb:device_value
+#+ATTR_LaTeX: :align |c|c|c|
+|------------+-----------------+--------------------|
+| 素子名     | 表示値          | 実測値             |
+|------------+-----------------+--------------------|
+|------------+-----------------+--------------------|
+| コンデンサ | 10 [${\mu}F$]   | 9.201 [${\mu}F$]   |
+|            | 330 [$nF$]      | 330.54 [$nF$]      |
+|------------+-----------------+--------------------|
+| 抵抗       | 100 [$k\Omega$] | 98.722 [$k\Omega$] |
+|            | 10 [$k\Omega$]  | 9.8249 [$k\Omega$] |
+|            | 22 [$k\Omega$]  | 21.925 [$k\Omega$] |
+|            | 2 [$k\Omega$]   | 2.0023 [$k\Omega$] |
+|------------+-----------------+--------------------|
+
+** LTspice IVを用いた回路シミュレーション
+回路シミュレーション用にエミッタ接地増幅回路のデータを作成し、[[基板制作]]で実測した値を入力してシミュレーションを行った。シミュレーションは周波数特性および入出力電圧の位相差に着目し、周波数は[100 \textbar 1k \textbar 10k \textbar 100k \textbar 1M \textbar 10M] [Hz]としてシミュレーションを行った。
+
+** 作成した回路の周波数特性計測
+   作成した回路の周波数特性について実際に計測を行った。計測は[100 \textbar 1k \textbar 10k \textbar 100k \textbar 1M \textbar 10M]*[1 \textbar 1.5 \textbar 2 \textbar 3 \textbar 5 \textbar 7] [Hz]で行い、[[LTspice IVを用いた回路シミュレーション]]で指定した周波数では位相差についても計測し、グラフを出力した。計測したデータはplot32を用いてグラフ化した。
+* 考察および課題
+** 作成した回路とシミュレーション結果の比較
+本実験で作成した回路における、シミュレーション結果と実測値の位相を比較したグラフを周波数ごとに図[[fig:100hz]]〜[[fig:10mhz]]に示す。また、各周波数ごとのGain [dB]を集計したものを表[[tb:gain]]に、それをグラフ化してシミュレーション結果と比較したものを図[[fig:freq]]にそれぞれ示す。
+
+周波数1[MHz]以下の実測値とシミュレーション結果において、大きな差は見られないため、ほぼ正確にシミュレートできていると思われる。一方で周波数10[MHz]の実測値とシミュレーション結果を比較すると、シミュレーションでは同位相に近くなりつつあるが、入力に対して出力のほうが振幅が大きく、かろうじて増幅できているように読み取れるが、実測値を見ると明らかに出力のほうが振幅が小さくなっている。このようなずれが生じる原因として考えられるものとして、素子の処理速度をシミュレータが考慮していないということが挙げられる。素子が何らかの処理を行う際には必ず遅延時間が発生する。低周波においては考慮しなくて良い程度の遅延でも、高周波になると、確実に遅延が大きくなる。これが増幅率が低下する原因であるが、シミュレータは理論通りの演算を続けるため、高周波における遅延時間を考慮できていない。これが高周波のみ実測値とシミュレーション結果に差が生まれた原因だと考えることができる。
+
+** DesignSpark PCBを用いた回路設計について
+DesignSpark PCBには、回路図から基板配線図への展開時のサポート機能として、補助線表示の他、自動で配線を行うAuto route機能が搭載されている。ただし、Auto route機能はあまり性能が高くなく、複雑な配線になると時折無茶苦茶な配線を生成することがある。その点、他の回路CADとして有名なものにEagleというものがあるが、そちらのほうが自動配線の機能が優秀で、きれいな配線が可能である。ただし、Eagleは２層基板までしかサポートしておらず、その点においては３層基板以上の設計も扱えるDesignSpark PCBは優れているといえる。３層以上の大規模な配線はDesignSpark PCBを用いて、２層以下の比較的単純なものはEagleなどの他の回路CADを用いるなど、使い分けることが重要である。
+** LTspice IVを用いた回路シミュレーションについて
+LTspice IVを用いて回路シミュレーションを行うメリットとして、実際に回路を作成するよりも時間・労力共にローコストであるということが挙げられる。小規模な回路特性の調査を目的とすると、基板設計、製作を行うのに比べて短時間で結果が得られる。一方で、本実験における周波数10[MHz]の位相の実測値とのずれのような、シミュレーションが一意に全て正しいと言い切れない場合が確実に存在するため、そういった特殊な条件に関しては、シミュレーションだけでは対応できないという点がデメリットとして挙げられる。ただし、素子の遅延時間など、より詳細なデータを持っている場合は、それらをシミュレーションに適用することで、正確なデータが得られる可能性がある。
+** DesignSpark PCBを用いた回路設計（課題）
+DesignSpark PCBを用いて、NAND素子のみで構成される1ビット全加算器を設計した。その"Schematic Design"を図[[fig:zensch]]、"PCB Design"を図[[fig:zenpcb]]に示す。この回路に用いた素子は
+- NAND IC 74LS00 3個
+- LED 5個
+- 抵抗 270 [$\Omega$] 5個
+- 2ピン（電源用）
+- 3ピン（入力用）
+である。入力用の3ピンに0[V]または5[V]を与え、その組み合わせに応じて出力側のLEDが点滅する。
+
+#+CAPTION: 100Hz
+#+NAME: fig:100hz
+\begin{figure}[htbp]
+ \begin{minipage}{0.5\hsize}
+  \begin{center}
+   \includegraphics[width=70mm]{./img/100hz_s.eps}
+  \end{center}
+\captionsetup{labelformat=empty,labelsep=none}
+  \caption{シミュレーション}
+  \addtocounter{figure}{-1}
+ \end{minipage}
+ \begin{minipage}{0.5\hsize}
+  \begin{center}
+   \includegraphics[width=70mm]{./img/100hz_e.eps}
+  \end{center}
+\captionsetup{labelformat=empty,labelsep=none}
+  \caption{実測値}
+  \addtocounter{figure}{-1}
+ \end{minipage}
+\end{figure}
+
+#+CAPTION: 1kHz
+#+NAME: fig:1khz
+\begin{figure}[htbp]
+ \begin{minipage}{0.5\hsize}
+  \begin{center}
+   \includegraphics[width=70mm]{./img/1khz_s.eps}
+  \end{center}
+\captionsetup{labelformat=empty,labelsep=none}
+  \caption{シミュレーション}
+  \addtocounter{figure}{-1}
+ \end{minipage}
+ \begin{minipage}{0.5\hsize}
+  \begin{center}
+   \includegraphics[width=70mm]{./img/1khz_e.eps}
+  \end{center}
+\captionsetup{labelformat=empty,labelsep=none}
+  \caption{実測値}
+  \addtocounter{figure}{-1}
+ \end{minipage}
+\end{figure}
+
+#+CAPTION: 10kHz
+#+NAME: fig:10khz
+\begin{figure}[htbp]
+ \begin{minipage}{0.5\hsize}
+  \begin{center}
+   \includegraphics[width=70mm]{./img/10khz_s.eps}
+  \end{center}
+\captionsetup{labelformat=empty,labelsep=none}
+  \caption{シミュレーション}
+  \addtocounter{figure}{-1}
+ \end{minipage}
+ \begin{minipage}{0.5\hsize}
+  \begin{center}
+   \includegraphics[width=70mm]{./img/10khz_e.eps}
+  \end{center}
+\captionsetup{labelformat=empty,labelsep=none}
+  \caption{実測値}
+  \addtocounter{figure}{-1}
+ \end{minipage}
+\end{figure}
+
+#+CAPTION: 100kHz
+#+NAME: fig:100khz
+\begin{figure}[htbp]
+ \begin{minipage}{0.5\hsize}
+  \begin{center}
+   \includegraphics[width=70mm]{./img/100khz_s.eps}
+  \end{center}
+\captionsetup{labelformat=empty,labelsep=none}
+  \caption{シミュレーション}
+  \addtocounter{figure}{-1}
+ \end{minipage}
+ \begin{minipage}{0.5\hsize}
+  \begin{center}
+   \includegraphics[width=70mm]{./img/100khz_e.eps}
+  \end{center}
+\captionsetup{labelformat=empty,labelsep=none}
+  \caption{実測値}
+  \addtocounter{figure}{-1}
+ \end{minipage}
+\end{figure}
+
+#+CAPTION: 1MHz
+#+NAME: fig:1mhz
+\begin{figure}[htbp]
+ \begin{minipage}{0.5\hsize}
+  \begin{center}
+   \includegraphics[width=70mm]{./img/1mhz_s.eps}
+  \end{center}
+\captionsetup{labelformat=empty,labelsep=none}
+  \caption{シミュレーション}
+  \addtocounter{figure}{-1}
+ \end{minipage}
+ \begin{minipage}{0.5\hsize}
+  \begin{center}
+   \includegraphics[width=70mm]{./img/1mhz_e.eps}
+  \end{center}
+\captionsetup{labelformat=empty,labelsep=none}
+  \caption{実測値}
+  \addtocounter{figure}{-1}
+ \end{minipage}
+\end{figure}
+
+#+CAPTION: 10MHz
+#+NAME: fig:10mhz
+\begin{figure}[htbp]
+ \begin{minipage}{0.5\hsize}
+  \begin{center}
+   \includegraphics[width=70mm]{./img/10mhz_s.eps}
+  \end{center}
+\captionsetup{labelformat=empty,labelsep=none}
+  \caption{シミュレーション}
+  \addtocounter{figure}{-1}
+ \end{minipage}
+ \begin{minipage}{0.5\hsize}
+  \begin{center}
+   \includegraphics[width=70mm]{./img/10mhz_e.eps}
+  \end{center}
+\captionsetup{labelformat=empty,labelsep=none}
+  \caption{実測値}
+  \addtocounter{figure}{-1}
+ \end{minipage}
+\end{figure}
+
+#+CAPTION: 周波数特性の実測データ
+#+NAME: tb:gain
+#+ATTR_LaTeX: :align |r|r|r|
+|----------------+----------+--------------|
+| Frequency [Hz] | Vout [V] |    Gain [dB] |
+|----------------+----------+--------------|
+|----------------+----------+--------------|
+|          1E+02 |     4.84 |  13.69690723 |
+|        1.5E+02 |     4.84 |  13.69690723 |
+|          2E+02 |     4.84 |  13.69690723 |
+|          3E+02 |     4.84 |  13.69690723 |
+|          5E+02 |     4.84 |  13.69690723 |
+|          7E+02 |     4.84 |  13.69690723 |
+|          1E+03 |     4.84 |  13.69690723 |
+|        1.5E+03 |     4.84 |  13.69690723 |
+|          2E+03 |     4.84 |  13.69690723 |
+|          3E+03 |     4.81 |  13.64290153 |
+|          5E+03 |     4.81 |  13.64290153 |
+|          7E+03 |     4.81 |  13.64290153 |
+|          1E+04 |     4.81 |  13.64290153 |
+|        1.5E+04 |     4.81 |  13.64290153 |
+|          2E+04 |     4.81 |  13.64290153 |
+|          3E+04 |     4.81 |  13.64290153 |
+|          5E+04 |     4.81 |  13.64290153 |
+|          7E+04 |     4.81 |  13.64290153 |
+|          1E+05 |     4.78 |  13.58855793 |
+|        1.5E+05 |     4.72 |  13.47883997 |
+|          2E+05 |     4.63 |  13.31161982 |
+|          3E+05 |     4.47 |  13.00615046 |
+|          5E+05 |     4.03 |  12.10610092 |
+|          7E+05 |     3.56 |  11.02899996 |
+|          1E+06 |        3 |  9.542425094 |
+|        1.5E+06 |     2.28 |   7.15869694 |
+|          2E+06 |     1.81 |  5.153571497 |
+|          3E+06 |     1.34 |  2.542095967 |
+|          5E+06 |     0.91 | -0.819172154 |
+|          7E+06 |     0.75 | -2.498774732 |
+|          1E+07 |     0.63 | -4.013189011 |
+|----------------+----------+--------------|
+
+#+CAPTION: 周波数特性の比較
+#+NAME: fig:freq
+\begin{figure}[htbp]
+ \begin{minipage}{0.5\hsize}
+  \begin{center}
+   \includegraphics[width=70mm]{./img/Freq_s.eps}
+  \end{center}
+\captionsetup{labelformat=empty,labelsep=none}
+  \caption{シミュレーション}
+  \addtocounter{figure}{-1}
+ \end{minipage}
+ \begin{minipage}{0.5\hsize}
+  \begin{center}
+   \includegraphics[width=70mm]{./img/Freq_e.eps}
+  \end{center}
+\captionsetup{labelformat=empty,labelsep=none}
+  \caption{実測値}
+  \addtocounter{figure}{-1}
+ \end{minipage}
+\end{figure}
+
+
+#+CAPTION: NANDのみで構成される全加算器のSchematic Design
+#+NAME: fig:zensch
+[[./img/zensch.eps]]
+
+#+CAPTION: NANDのみで構成される全加算器のPCB Design
+#+NAME: fig:zenpcb
+[[./img/zenpcb.eps]]

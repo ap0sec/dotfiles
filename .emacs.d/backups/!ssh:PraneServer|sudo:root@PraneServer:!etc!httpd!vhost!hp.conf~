@@ -1,0 +1,12 @@
+<virtualHost *:80>
+    ServerName www.prane.biz
+    DocumentRoot /var/www/html/wordpress
+    AllowEncodedSlashes On
+    CustomLog      logs/wordpress.access.log combined
+    ErrorLog       logs/wordpress.error.log
+    <Directory /var/www/html/wordpress>
+        SetEnv REAL_HOST_NAME wordpress.prane.biz
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>

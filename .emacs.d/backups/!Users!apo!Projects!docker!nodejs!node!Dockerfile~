@@ -1,0 +1,6 @@
+FROM node:8.11.4-jessie
+
+RUN useradd --user-group --create-home --shell /bin/false app && \
+
+USER app
+WORKDIR var/www

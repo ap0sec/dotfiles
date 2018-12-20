@@ -1,0 +1,130 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,titlepage]{jsarticle}
+                                \usepackage{caption}
+                \usepackage[dvipdfmx]{graphicx}
+\author{小高 拓海}
+\date{\today}
+\title{実験2}
+\begin{document}
+
+\maketitle
+
+
+\section{使用機器}
+\label{sec:org5f3c05c}
+本実験における使用機器を表\ref{tab:org9b2057d}に示す。
+
+\begin{table}[htbp]
+\caption{\label{tab:org9b2057d}
+使用機器}
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+機器名 & メーカー名 & 型番 & シリアルNo.\\
+\hline
+\hline
+ノートPC & Lenovo & ThinkPad Edge E530c & M78X 10161\\
+\hline
+DAQボード & QUANSER & Q2-USB & -\\
+\hline
+アンプ & QUANSER & VoltPAQ-X1 & -\\
+\hline
+ベースユニット & Quanser & SRV02 & -\\
+\hline
+アーム & - & - & -\\
+\hline
+振子 & - & - & -\\
+\hline
+\end{tabular}
+\end{table}
+
+\section{制御実験}
+\label{sec:org3b313df}
+ワークシートの表Cに示されている内容のうち、実験番号4について実験を行った。
+
+\subsection{実験内容 制御対象の測定結果の変更による制御応答の測定と考察}
+\label{sec:orgcf8d986}
+制御対象の測定結果（質量等）に誤差があった場合を想定し、状態空間表現の数値を変化させ、制御応答や極配置がどのように変化するかを測定して整理し、考察する。今回の想定項目は、アームの両端の軸間距離に誤差が生じたものとして実験を行った。
+
+\subsection{実験方法}
+\label{sec:org1cac570}
+アームの軸から振子の取り付け位置までの距離を20[cm]として固定する。その際、距離の測定に誤差が生じたと想定し、距離20[cm]に対して0.5倍、0.6倍\ldots{}1.4倍、1.5倍までの11段階で変化させ、算出結果が誤っている状態での制御応答について記録した。
+
+\section{結果}
+\label{sec:org026878f}
+\subsection{極配置及びフィードバックゲイン}
+\label{sec:org8740af2}
+アームの両端の軸間距離を変化させていった際の極配置及びフィードバックゲインについて表\ref{tab:org37ad437}に示す。
+
+\begin{table}[htbp]
+\caption{\label{tab:org37ad437}
+極配置とフィードバックゲインの変化}
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+誤差数 & 極 & フィードバックゲイン & 動作\\
+\hline
+1.5 & 0,-14.443081,7.2928949,-4.4919813 & -2.8266884,23.98044,-2.4725187,3.3504107 & 安定\\
+1.4 & 0,-15.632365,7.2197725,-4.812558 & -2.4623597,22.381744,-2.2246252,3.1270499 & 安定\\
+1.3 & 0,-17.205629,7.1435088,-5.1252071 & -2.123157,20.783048,-1.9938278,2.9036892 & 安定\\
+1.2 & 0,-19.304068,7.0647458,-5.4209125 & -1.8090806,19.184352,-1.7801265,2.6803285 & 安定\\
+1.1 & 0,-22.129826,6.9843495,-5.6923412 & -1.5201302,17.585656,-1.5835213,2.4569678 & 安定\\
+1 & 0,-25.984272,6.9034164,-5.9347939 & -1.2563059,15.98696,-1.4040123,2.2336071 & 安定\\
+0.9 & 0,-31.339162,6.8232612,-6.1463298 & -1.0176078,14.388264,-1.2415993,2.0102464 & 安定\\
+0.8 & 0,-38.974451,6.7453825,-6.3272311 & -0.8040358,12.789568,-1.0962824,1.7868857 & 安定\\
+0.7 & 0,-50.262667,6.6714063,-6.4791981 & -0.6155899,11.190872,-0.9680617,1.563525 & 安定\\
+0.6 & 0,-67.809199,6.6030137,-6.6046065 & -0.4522701,9.5921761,-0.856937,1.3401643 & 安定\\
+0.5 & 0,-97.068339,6.5418572,-6.7059698 & -0.3140765,7.9934801,-0.7629084,1.1168096 & 安定\\
+\hline
+\end{tabular}
+\end{table}
+
+
+\subsection{アームの回転動作の振幅}
+\label{sec:orgbc6da8f}
+アームの回転動作における振幅の観測結果についてまとめたグラフを図\ref{fig:org0f3b529}に、誤差率を横軸に取った際の振幅の推移を示すグラフを図\ref{fig:org619502f}に示す。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.9\linewidth]{./img/arm1.png}
+\caption{\label{fig:org0f3b529}
+アームの回転動作の振幅}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.9\linewidth]{./img/arm2.png}
+\caption{\label{fig:org619502f}
+誤差率によるアームの振幅の推移}
+\end{figure}
+
+\subsection{振子の角度振幅}
+\label{sec:org2245990}
+誤差率を変化させる中で測定された振子の角度振幅についてまとめたグラフを図\ref{fig:orgbfabe60}に、誤差率をい横軸に取った際の角度振幅の推移を示すグラフを図\ref{fig:org8bbd9b0}に示す。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.9\linewidth]{./img/pendu1.png}
+\caption{\label{fig:orgbfabe60}
+振子の角度振幅}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.9\linewidth]{./img/pendu2.png}
+\caption{\label{fig:org8bbd9b0}
+誤差率によるアームの振幅の推移}
+\end{figure}
+
+
+
+\section{考察}
+\label{sec:org7754c86}
+\subsection{極配置及びフィードバックゲイン}
+\label{sec:orgea9e5f1}
+アームの両端の軸間距離Lrに誤差が生じたものとして計算した結果、極配置は実部に正の値が見られたため、システムはフィードバックなしには不安定である。その原因として、軸間距離Lrに比べてシステムへの影響が大きいほかの変数の存在が考えられる。その変数が大きく変動しない限り、軸間距離の変更を行ったとしてもシステムの安定性へ影響を与えることはできないと考えられる。
+
+\subsection{アームの回転動作の振幅}
+\label{sec:org2526e0f}
+図\ref{fig:org619502f}を見ると、正常値である1倍時に比べ、0.7倍した際のほうが振幅が小さくなったことから、実際に定めた20[cm]に誤差があった可能性、また、方程式で導かれる値以外に、システムが安定足りうる局所解のようなものが存在する可能性が考えられる。このことは、図\ref{fig:org8bbd9b0}において一部急に振幅が小さくなっていることからも裏付けが可能であると考えられる。
+\end{document}
