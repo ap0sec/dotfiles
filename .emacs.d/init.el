@@ -86,17 +86,13 @@
 (load "init-company")
 (load "init-helm")
 (load "init-org")
-(load "init-rust")
 (load "init-rjsx")
 (load "init-js")
-(load "init-ts")
 (load "init-web")
 (load "prettier")
 
 (when (eq system-type 'darwin)
   (load "init-osx"))
-
-(require 'ox-qmd)
 
 ;;##############################
 

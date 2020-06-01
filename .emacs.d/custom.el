@@ -8,7 +8,7 @@
     ("31d990a1d0b4ac46b3400c9d0b49692e170e1fe9c4209051c196c1b5ea897df0" default)))
  '(package-selected-packages
    (quote
-    (typescript-mode csharp-mode rjsx-mode jsx-mode react-snippets web-mode company-php php-mode yaml-mode ox-gfm yasnippet company-irony irony company-racer company flycheck-rust racer rust-mode dockerfile-mode swift-mode org-plus-contrib browse-kill-ring px org fuzzy helm markdown-mode magit))))
+    (rjsx-mode jsx-mode react-snippets web-mode company-php php-mode yaml-mode ox-gfm yasnippet company-irony irony company-racer company dockerfile-mode org-plus-contrib browse-kill-ring org fuzzy helm markdown-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
