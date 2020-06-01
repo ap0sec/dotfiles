@@ -1,13 +1,19 @@
-FROM centos:7
+FROM ubuntu:bionic
 
 MAINTAINER ap0sec <apo.t.laboratory@gmail.com>
 
-RUN yum -y update && \
-    yum -y install curl git && \
-    curl -sL https://rpm.nodesource.com/setup_6.x | bash -- && \
-    yum -y install nodejs
+RUN apt-get -y update && \
+    apt-get -y install curl git && \
+    apt-get install -my wget gnupg && \
+    curl -sL https://deb.nodesource.com/setup_6.x | bash -- && \
+    apt-get -y install nodejs npm && \
+    npm cache clean && \
+    npm install n -g && \
+    n stable && \
+    ln -sf /usr/local/bin/node /usr/bin/node && \
+    apt-get purge -y nodejs npm
 
-WORKDIR /var/www/html/prichanEx
+WORKDIR /var/www/html/quest
 
 ENTRYPOINT ["npm"]
 CMD ["-h"]

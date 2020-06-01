@@ -1,11 +1,15 @@
+Host *
+     UseKeychain yes
+     AddKeysToAgent yes
+     
 Host SmartKeyOnRaspberry
-     Hostname 192.168.0.7
+     Hostname 192.168.10.21
      Port 22
      User tech
 
 Host PraneServer
      Hostname prane.biz
-     port 22
+     port 36578
      User prane
      IdentityFile ~/.ssh/id_rsa
 
@@ -15,7 +19,7 @@ Host JServer
      User sdj18b03
 
 Host AWS
-     Hostname ec2-34-220-243-144.us-west-2.compute.amazonaws.com
+     Hostname ec2-34-216-81-150.us-west-2.compute.amazonaws.com
      port 22
-     User ec2-user
-     IdentityFile ~/.ssh/apo.pem     
+     User ubuntu
+     IdentityFile ~/.ssh/apo.pem

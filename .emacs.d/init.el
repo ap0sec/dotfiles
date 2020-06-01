@@ -23,17 +23,17 @@
 
 ;;キーバインド
 (global-set-key (kbd "C-t") 'other-window)
-
+(global-set-key (kbd "C-u") 'undo)
 (global-set-key (kbd "C-c h") 'helm-mini)
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-x p") 'prettier-reload)
+
 
 ;;フレーム設定
 (column-number-mode t)
 (global-linum-mode t)
-
-;;インデント設定
-(setq-default indent-tabs-mode nil)
+(menu-bar-mode -1)
 
 ;;バックアップファイル設定
 (add-to-list 'backup-directory-alist
@@ -41,19 +41,16 @@
 (setq auto-save-file-name-transforms
       `((".*" , (expand-file-name "~/.emacs.d/backups/") t)))
 
+;;カラーテーマ
+(load-theme 'tsdh-dark t)
+
 ;;##############################
 
 ;;拡張子設定
-
-;;.mdをmarkdownモードで開く
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
-;;##############################
-
-;;テーマ関連
-(setq custom-theme-directory "~/.emacs.d/elisp/themes/")
-(load-theme 'euphoria t)
-
+(add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
+(add-to-list 'auto-mode-alist '("containers\\/.*\\.js\\'" . rjsx-mode))
 ;;##############################
 
 ;;パッケージ管理関連
@@ -79,19 +76,25 @@
 
 ;;##############################
 
-;;コンフィグファイル設定
-
 ;;カスタムファイル設定
 (setq custom-file (locate-user-emacs-file "custom.el"))
 (unless (file-exists-p custom-file)
   (write-region "" nil custom-file))
 (load custom-file)
 
-;;各種設定ファイル読み込み
+;;コンフィグファイル設定
 (load "init-company")
 (load "init-helm")
 (load "init-org")
 (load "init-rust")
+(load "init-rjsx")
+(load "init-js")
+(load "init-ts")
+(load "init-web")
+(load "prettier")
+
+(when (eq system-type 'darwin)
+  (load "init-osx"))
 
 (require 'ox-qmd)
 

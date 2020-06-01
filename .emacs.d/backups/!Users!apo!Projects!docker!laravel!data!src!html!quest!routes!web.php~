@@ -11,31 +11,6 @@
 |
 */
 
-Route::get('/', 'StartController@index');
-Route::post('/', 'StartController@post');
-
-Route::get('contents', 'ContentsController@index')->name('contents');
-Route::post('contents', 'ContentsController@post')->name('contents');
-
-Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
-
-// 全ユーザ
-Route::group(['middleware' => ['auth', 'can:user-higher']], function () {
-    Route::get('upload', 'UploadController@index');
-    Route::post('upload', 'UploadController@post');
+Route::get('/', function () {
+    return view('welcome');
 });
-
-// 管理者以上
-Route::group(['middleware' => ['auth', 'can:admin-higher']], function () {
-
-});
-
-// システム管理者のみ
-Route::group(['middleware' => ['auth', 'can:system-only']], function () {
-
-});
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

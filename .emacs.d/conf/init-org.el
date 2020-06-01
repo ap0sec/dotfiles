@@ -3,16 +3,25 @@
 
 ;;; LaTeX 形式のファイル PDF に変換するためのコマンド
 (setq org-latex-pdf-process
-      '("uplatex %f"
-        "uplatex %f"
-        "ubibtex %b"
-        "uplatex %f"
-        "uplatex %f"
+      '("uplatex -shell-escape %f"
+	"uplatex -shell-escape %f"
+        "pbibtex %b"
+	"uplatex -shell-escape %f"
+	"uplatex -shell-escape %f"
         "dvipdfmx %b.dvi"))
 
 ;;; \hypersetup{...} を出力しない
 (setq org-latex-with-hyperref nil)
 
+(setq org-latex-listings 'minted)
+(setq org-latex-minted-options
+      '(("frame" "lines")
+        ("framesep=2mm")
+        ("linenos=true")
+        ("baselinestretch=1.2")
+        ("fontsize=\\footnotesize")
+        ("breaklines")
+        ))
 
 (add-to-list 'org-latex-classes
              '("jreport"
@@ -29,7 +38,7 @@
 
 (add-to-list 'org-latex-classes
              '("jsarticle"
-               "\\documentclass[a4paper,titlepage]{jsarticle}
+               "\\documentclass[a4paper,titlepage,uplatex]{jsarticle}
                 [NO-PACKAGES]
                 [NO-DEFAULT-PACKAGES]
                 \\usepackage{caption}
@@ -42,30 +51,35 @@
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
 (add-to-list 'org-latex-classes
-             '("mini_report"
-               "\\documentclass[a4paper,titlepage]{jsarticle}
+             '("no_num"
+               "\\documentclass[a4paper,uplatex]{jsarticle}
                 [NO-PACKAGES]
                 [NO-DEFAULT-PACKAGES]
                 \\usepackage{caption}
                 \\usepackage{url}
                 \\usepackage[dvipdfmx]{graphicx}
                 \\usepackage{titlesec}"
-               ("\\section*{%s}" . "\\section*{%s}")               
+               ("\\section*{%s}" . "\\section*{%s}")
                ("\\subsection*{%s}" . "\\subsection*{%s}")
                ("\\subsubsection*{%s}" . "\\subsubsection*{%s}")
                ("\\paragraph*{%s}" . "\\paragraph*{%s}")
                ("\\subparagraph*{%s}" . "\\subparagraph*{%s}")))
 
+
 (add-to-list 'org-latex-classes
-             '("kurimoto"
-               "\\documentclass[12pt]{jarticle}
+             '("mini_report"
+               "\\documentclass[a4paper,uplatex]{jsarticle}
                 [NO-PACKAGES]
-                [NO-DEFAULT-PACKAGES]"
+                [NO-DEFAULT-PACKAGES]
+                \\usepackage{caption}
+                \\usepackage{url}
+                \\usepackage[dvipdfmx]{graphicx}"
                ("\\section{%s}" . "\\section*{%s}")
                ("\\subsection{%s}" . "\\subsection*{%s}")
                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")               
                ("\\paragraph{%s}" . "\\paragraph*{%s}")
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
 
 (add-to-list 'org-latex-classes
              '("proceeding_DJ"
@@ -75,5 +89,17 @@
                ("\\section{%s}" . "\\section*{%s}")
                ("\\subsection{%s}" . "\\subsection*{%s}")
                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")               
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+(add-to-list 'org-latex-classes
+             '("thesis_DJ"
+               "\\documentclass[uplatex,12pt]{ujreport}
+                [NO-PACKAGES]
+                [NO-DEFAULT-PACKAGES]"
+               ("\\chapter{%s}" . "\\chapter*{%s}")
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                ("\\paragraph{%s}" . "\\paragraph*{%s}")
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))

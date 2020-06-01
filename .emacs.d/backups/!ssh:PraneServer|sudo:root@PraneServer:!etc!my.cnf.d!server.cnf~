@@ -23,6 +23,11 @@
 # If you use the same .cnf file for MySQL and MariaDB,
 # you can put MariaDB-only options here
 [mariadb]
-
+log-bin=mysql-bin
+binlog_format=ROW
+innodb_file_per_table = 1
+innodb_file_format = Barracuda
+innodb_file_format_max = Barracuda
+innodb_large_prefix = ON
 [mariadb-5.5]
 
