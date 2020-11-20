@@ -1,4 +1,0 @@
-location ^~ /.well-known/acme-challenge {
-         default_type "text/plain"; # 念のため
-         root /var/www/html; # 実際はどこでもいいぽい？
-         }

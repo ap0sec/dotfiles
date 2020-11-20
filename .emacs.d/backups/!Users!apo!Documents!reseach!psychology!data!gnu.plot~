@@ -1,7 +1,0 @@
-set terminal postscript eps
-
-set output 'eps/nile_vario.eps'
-
-set datafile separator ","
-
-plot "csv/nile_vario.csv"

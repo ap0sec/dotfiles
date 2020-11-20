@@ -1,8 +1,0 @@
-set terminal postscript eps
-
-set output 'eps/pulse_noise_ACF.eps'
-
-set datafile separator ","
-set logscale x
-set logscale y
-plot "csv/pulse_noise_ACF.csv"

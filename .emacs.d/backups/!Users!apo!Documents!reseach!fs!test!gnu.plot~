@@ -1,5 +1,0 @@
-set terminal postscript eps
-
-set output 'graph.eps'
-
-plot "entropy.txt"
