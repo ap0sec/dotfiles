@@ -243,14 +243,7 @@
   :tag "emulation" "convenience"
   :added "2020-12-01"
   :url "http://github.com/joaotavora/yasnippet"
-  :ensure t
-  :config
-  (leaf company-yasnippet
-    :doc "company-mode completion backend for Yasnippet"
-    :tag "out-of-MELPA"
-    :added "2020-12-01"
-    :ensure t
-    :require t))
+  :ensure t)
 
 (leaf neotree
   :doc "A tree plugin like NerdTree for Vim"
