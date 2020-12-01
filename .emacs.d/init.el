@@ -85,12 +85,13 @@
               (scroll-bar-mode . nil)
               (column-number-mode . t)
               (menu-bar-mode . nil)
+              (tool-bar-mode . nil)
               (global-display-line-numbers-mode . t)
               (indent-tabs-mode . nil))
     :config
     (defalias 'yes-or-no-p 'y-or-n-p)
     (keyboard-translate ?\C-h ?\C-?))
-
+              
   (leaf delsel
     :doc "delete selection if you insert"
     :tag "builtin"
@@ -123,6 +124,8 @@
   (global-set-key (kbd "C-t") 'other-window)
   (global-set-key (kbd "C-u") 'undo))
 
+(setq default-frame-alist '((font . "Menlo-18")))
+
 (leaf *leaf
   :config
   (leaf leaf-convert
@@ -143,26 +146,28 @@
     :custom ((imenu-list-size . 30)
              (imenu-list-position . 'right))))
 
-(leaf zenburn-theme
-  :doc "A low contrast color theme for Emacs."
-  :url "http://github.com/bbatsov/zenburn-emacs"
+(leaf doom-themes
+  :custom ((doom-themes-enable-italic . t)
+           (doom-themes-enable-bold . t))
   :ensure t
   :config
-  (load-theme 'zenburn t))
+  (load-theme 'doom-dracula t)
+  (doom-themes-neotree-config)
+  (doom-themes-org-config))
 
 (leaf doom-modeline
-  :doc "A minimal and modern mode-line"
-  :req "emacs-25.1" "all-the-icons-2.2.0" "shrink-path-0.2.0" "dash-2.11.0"
-  :tag "mode-line" "faces" "emacs>=25.1"
-  :added "2020-11-27"
-  :url "https://github.com/seagle0128/doom-modeline"
-  :emacs>= 25.1
   :ensure t
-  :custom ((doom-modeline-buffer-file-name-style . 'truncate-with-project)
-           (doom-modeline-icon . t)
-           (doom-modeline-major-mode-icon . nil)
-           (doom-modeline-minor-modes . nil))
-  :after all-the-icons shrink-path)
+  :require t
+  :hook (after-init-hook . doom-modeline-mode)
+  :custom
+  (doom-modeline-bar-width . 3)
+  (doom-modeline-height . 25)
+  (doom-modeline-major-mode-color-icon . t)
+  (doom-modeline-minor-modes . t)
+  (doom-modeline-github . nil)
+  (doom-modeline-mu4e . nil)
+  (doom-modeline-irc . nil))
+
 
 (leaf ivy
   :doc "Incremental Vertical completYon"
@@ -251,8 +256,24 @@
   :url "https://github.com/emacs-lsp/lsp-mode"
   :emacs>= 26.1
   :ensure t
-  ;; :hook ((python-mode-hook . lsp))
-  )
+  :hook ((python-mode-hook . lsp))
+  :config
+  (leaf lsp-ui
+    :doc "UI modules for lsp-mode"
+    :req "emacs-26.1" "dash-2.14" "dash-functional-1.2.0" "lsp-mode-6.0" "markdown-mode-2.3"
+    :tag "tools" "languages" "emacs>=26.1"
+    :added "2020-11-30"
+    :url "https://github.com/emacs-lsp/lsp-ui"
+    :emacs>= 26.1
+    :ensure t
+    :after lsp-mode markdown-mode
+    :custom ((lsp-ui-doc-enable . t)
+             (lsp-ui-doc-header . t)
+             (lsp-ui-doc-include-signature . t)
+             (lsp-ui-doc-position . 'top)
+             (lsp-ui-doc-max-width . 150)
+             (lsp-ui-doc-max-height . 25)
+             (lsp-ui-flycheck-enable . nil))))
 
 (leaf *python
   :config
@@ -270,6 +291,18 @@
     :hook (python-mode-hook . py-autopep8-enable-on-save)
     :setq ((py-autopep8-options quote
                               ("--max-line-length=200")))))
+
+(leaf git-gutter
+  :bind (("C-c g" . hydra-git-gutter/body))
+  :custom ((git-gutter:ask-p))
+  :global-minor-mode global-git-gutter-mode
+  :config
+  (defhydra hydra-git-gutter nil
+    "git hunk"
+    ("p" git-gutter:previous-hunk "previous")
+    ("n" git-gutter:next-hunk "next")
+    ("s" git-gutter:stage-hunk "stage")
+    ("r" git-gutter:revert-hunk "revert")))
 
 (leaf *yaml
   :config
