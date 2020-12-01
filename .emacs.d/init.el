@@ -237,6 +237,21 @@
            (company-transformers . '(company-sort-by-occurrence)))
   :global-minor-mode global-company-mode)
 
+(leaf yasnippet
+  :doc "Yet another snippet extension for Emacs"
+  :req "cl-lib-0.5"
+  :tag "emulation" "convenience"
+  :added "2020-12-01"
+  :url "http://github.com/joaotavora/yasnippet"
+  :ensure t
+  :config
+  (leaf company-yasnippet
+    :doc "company-mode completion backend for Yasnippet"
+    :tag "out-of-MELPA"
+    :added "2020-12-01"
+    :ensure t
+    :require t))
+
 (leaf neotree
   :doc "A tree plugin like NerdTree for Vim"
   :req "cl-lib-0.5"
@@ -248,6 +263,18 @@
   :custom ((neo-theme . "ascii")
            (neo-persist-show . t)
            (neo-smart-open . t)))
+
+(leaf git-gutter
+  :bind (("C-c g" . hydra-git-gutter/body))
+  :custom ((git-gutter:ask-p))
+  :global-minor-mode global-git-gutter-mode
+  :config
+  (defhydra hydra-git-gutter nil
+    "git hunk"
+    ("p" git-gutter:previous-hunk "previous")
+    ("n" git-gutter:next-hunk "next")
+    ("s" git-gutter:stage-hunk "stage")
+    ("r" git-gutter:revert-hunk "revert")))
 
 (leaf lsp-mode
   :doc "LSP mode"
@@ -275,6 +302,15 @@
              (lsp-ui-doc-max-height . 25)
              (lsp-ui-flycheck-enable . nil))))
 
+(leaf *org
+  :config
+  (leaf org-pomodoro
+    :doc "Pomodoro implementation for org-mode."
+    :req "alert-0.5.10" "cl-lib-0.5"
+    :added "2020-12-01"
+    :url "https://github.com/lolownia/org-pomodoro"
+    :ensure t))
+
 (leaf *python
   :config
   (leaf lsp-jedi
@@ -282,8 +318,7 @@
     :require t
     :config
     (with-eval-after-load '"lsp-mode"
-      (add-to-list 'lsp-disabled-clients 'pyls)
-      (add-to-list 'lsp-enabled-clients 'jedi)))
+      (add-to-list 'lsp-enabled-clients 'pyls)))
   (leaf py-autopep8
     :doc "Use autopep8 to beautify a Python buffer"
     :url "http://paetzke.me/project/py-autopep8.el"
@@ -291,18 +326,6 @@
     :hook (python-mode-hook . py-autopep8-enable-on-save)
     :setq ((py-autopep8-options quote
                               ("--max-line-length=200")))))
-
-(leaf git-gutter
-  :bind (("C-c g" . hydra-git-gutter/body))
-  :custom ((git-gutter:ask-p))
-  :global-minor-mode global-git-gutter-mode
-  :config
-  (defhydra hydra-git-gutter nil
-    "git hunk"
-    ("p" git-gutter:previous-hunk "previous")
-    ("n" git-gutter:next-hunk "next")
-    ("s" git-gutter:stage-hunk "stage")
-    ("r" git-gutter:revert-hunk "revert")))
 
 (leaf *yaml
   :config
