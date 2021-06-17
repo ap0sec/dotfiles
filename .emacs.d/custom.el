@@ -24,14 +24,14 @@
  '(imenu-list-size 30 t)
  '(indent-tabs-mode nil)
  '(init-file-debug t t)
- '(menu-bar-mode t)
+ '(menu-bar-mode nil)
  '(mouse-wheel-scroll-amount '(1 ((control) . 5)))
  '(package-archives
    '(("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")
      ("org" . "https://orgmode.org/elpa/")))
  '(package-selected-packages
-   '(unicode-fonts zenburn-theme yaml-mode use-package py-autopep8 powerline neotree lsp-ui lsp-jedi leaf-tree leaf-convert hydra git-gutter el-get doom-themes doom-modeline counsel company blackout))
+   '(php-mode zenburn-theme yasnippet yaml-mode use-package unicode-fonts py-autopep8 powerline ox-gfm org-pomodoro neotree lsp-ui lsp-jedi leaf-tree leaf-convert json-reformat hydra highlight-indent-guides git-gutter el-get doom-themes doom-modeline counsel company blackout auto-virtualenvwrapper auto-virtualenv))
  '(scroll-bar-mode nil)
  '(scroll-conservatively 100)
  '(scroll-preserve-screen-position t)
@@ -47,4 +47,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(doom-modeline-bar ((t (:background "#6272a4"))) nil "Customized with leaf in doom-themes block"))
+ '(git-gutter:added ((t (:background "#50fa7b"))) nil "Customized with leaf in git-gutter block")
+ '(git-gutter:deleted ((t (:background "#ff79c6"))) nil "Customized with leaf in git-gutter block")
+ '(git-gutter:modified ((t (:background "#f1fa8c"))) nil "Customized with leaf in git-gutter block"))

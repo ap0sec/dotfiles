@@ -1,3 +1,4 @@
+
 ;;; init.el --- My init.el  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2020  Naoya Yamashita
@@ -124,7 +125,7 @@
   (global-set-key (kbd "C-t") 'other-window)
   (global-set-key (kbd "C-u") 'undo))
 
-(setq default-frame-alist '((font . "Menlo-18")))
+(setq default-frame-alist '((font . "Menlo-17")))
 
 (leaf *leaf
   :config
@@ -142,7 +143,8 @@
     :url "https://github.com/conao3/leaf-tree.el"
     :emacs>= 25.1
     :ensure t
-    :bind (("C-c t" . leaf-tree-mode))
+    :bind ((lisp-mode-map
+            ("C-c t" . leaf-tree-mode)))
     :custom ((imenu-list-size . 30)
              (imenu-list-position . 'right))))
 
@@ -243,7 +245,10 @@
   :tag "emulation" "convenience"
   :added "2020-12-01"
   :url "http://github.com/joaotavora/yasnippet"
-  :ensure t)
+  :ensure t
+  :custom
+  (yas-snippet-dirs . '("~/.emacs.d/yasnippets"))
+  :global-minor-mode yas-global-mode)
 
 (leaf neotree
   :doc "A tree plugin like NerdTree for Vim"
@@ -257,9 +262,30 @@
            (neo-persist-show . t)
            (neo-smart-open . t)))
 
+(leaf highlight-indent-guides
+  :doc "Minor mode to highlight indentation"
+  :req "emacs-24.1"
+  :tag "emacs>=24.1"
+  :added "2020-12-02"
+  :url "https://github.com/DarthFennec/highlight-indent-guides"
+  :emacs>= 24.1
+  :ensure t
+  :custom ((highlight-indent-guides-auto-enabled . t)
+           (highlight-indent-guides-responsive . t)
+           (highlight-indent-guides-method . 'character))
+  :hook ((yaml-mode-hook . highlight-indent-guides-mode)
+         (python-mode-hook . highlight-indent-guides-mode)
+         (emacs-lisp-mode-hook . highlight-indent-guides-mode)))
+
 (leaf git-gutter
   :bind (("C-c g" . hydra-git-gutter/body))
-  :custom ((git-gutter:ask-p))
+  :custom ((git-gutter:ask-p . nil)
+           (git-gutter:modified-sign . "~")
+           (git-gutter:added-sign . "+")
+           (git-gutter:deleted-sign . "-"))
+  :custom-face ((git-gutter:modified quote((t(:background "#f1fa8c"))))
+                (git-gutter:added quote((t(:background "#50fa7b"))))
+                (git-gutter:deleted quote((t(:background "#ff79c6")))))
   :global-minor-mode global-git-gutter-mode
   :config
   (defhydra hydra-git-gutter nil
@@ -296,29 +322,57 @@
              (lsp-ui-flycheck-enable . nil))))
 
 (leaf *org
+  :custom ((org-todo-keywords . '((sequence "TODO(t)" "IN_DRAFT(i)" "REMIND(r)" "|" "DONE(d)"))))
   :config
+  (leaf org-agenda
+    :doc "Dynamic task and appointment lists for Org"
+    :tag "out-of-MELPA" "wp" "calendar" "hypermedia" "outlines"
+    :url "https://orgmode.org"
+    :bind (("C-c a a" . org-agenda)
+           ("C-c a t" . org-todo-list)
+           ("C-c a s" . org-tags-view))
+    :custom ((org-agenda-files . '("~/Orgs/remind.org"
+                                   "~/Orgs/project"))))
+  (leaf org-capture
+    :doc "Fast note taking in Org"
+    :tag "out-of-MELPA" "wp" "calendar" "hypermedia" "outlines"
+    :added "2020-12-08"
+    :url "https://orgmode.org"
+    :bind (("C-c a c" . org-capture))
+    :custom ((org-capture-templates . '(("t" "Todo" entry (file+headline "~/Orgs/remind.org" "Capture") "* REMIND %? (wrote on %U)")))))
   (leaf org-pomodoro
     :doc "Pomodoro implementation for org-mode."
     :req "alert-0.5.10" "cl-lib-0.5"
     :added "2020-12-01"
     :url "https://github.com/lolownia/org-pomodoro"
-    :ensure t))
+    :ensure t
+    :bind ((org-agenda-mode-map
+            ("S-p" . org-pomodoro)))))
 
 (leaf *python
   :config
-  (leaf lsp-jedi
+  (leaf virtualenvwrapper
+    :doc "a featureful virtualenv tool for Emacs"
+    :req "dash-1.5.0" "s-1.6.1"
+    :tag "virtualenvwrapper" "virtualenv" "python"
+    :added "2021-04-01"
+    :url "http://github.com/porterjamesj/virtualenvwrapper.el"
+    :ensure t)
+  (leaf auto-virtualenvwrapper
+    :doc "Lightweight auto activate python virtualenvs"
+    :req "cl-lib-0.6" "s-1.10.0" "virtualenvwrapper-0"
+    :tag "tools" "virtualenv" "python"
+    :added "2021-04-01"
     :ensure t
-    :require t
-    :config
-    (with-eval-after-load '"lsp-mode"
-      (add-to-list 'lsp-enabled-clients 'pyls)))
+    :after virtualenvwrapper
+    :hook (python-mode-hook . auto-virtualenvwrapper-activate))
   (leaf py-autopep8
     :doc "Use autopep8 to beautify a Python buffer"
     :url "http://paetzke.me/project/py-autopep8.el"
     :ensure t
     :hook (python-mode-hook . py-autopep8-enable-on-save)
     :setq ((py-autopep8-options quote
-                              ("--max-line-length=200")))))
+                              ("--max-line-length=120")))))
 
 (leaf *yaml
   :config
@@ -337,3 +391,5 @@
 ;; End:
 
 ;;; init.el ends here
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)

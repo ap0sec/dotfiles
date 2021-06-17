@@ -1,0 +1,10 @@
+;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8-emacs -*-
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("org-capture-last-stored"
+ (filename . "~/Orgs/remind.org")
+ (front-context-string . "** REMIND VPCFlo")
+ (rear-context-string . "01-28 木 16:11])\n")
+ (position . 773))
+)
