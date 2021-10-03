@@ -31,7 +31,7 @@
      ("melpa" . "https://melpa.org/packages/")
      ("org" . "https://orgmode.org/elpa/")))
  '(package-selected-packages
-   '(php-mode zenburn-theme yasnippet yaml-mode use-package unicode-fonts py-autopep8 powerline ox-gfm org-pomodoro neotree lsp-ui lsp-jedi leaf-tree leaf-convert json-reformat hydra highlight-indent-guides git-gutter el-get doom-themes doom-modeline counsel company blackout auto-virtualenvwrapper auto-virtualenv))
+   '(pyvenv yasnippet yaml-mode py-autopep8 org-pomodoro neotree lsp-ui leaf-tree leaf-convert hydra highlight-indent-guides el-get doom-themes doom-modeline counsel company blackout auto-virtualenvwrapper))
  '(scroll-bar-mode nil)
  '(scroll-conservatively 100)
  '(scroll-preserve-screen-position t)

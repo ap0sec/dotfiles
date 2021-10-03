@@ -125,7 +125,7 @@
   (global-set-key (kbd "C-t") 'other-window)
   (global-set-key (kbd "C-u") 'undo))
 
-(setq default-frame-alist '((font . "Menlo-17")))
+(setq default-frame-alist '((font . "Menlo-15")))
 
 (leaf *leaf
   :config
