@@ -302,7 +302,9 @@
   :url "https://github.com/emacs-lsp/lsp-mode"
   :emacs>= 26.1
   :ensure t
-  :hook ((python-mode-hook . lsp))
+  :hook ((python-mode-hook . lsp)
+         (rust-mode-hook . lsp))
+  :custom (lsp-rust-server 'rls)
   :config
   (leaf lsp-ui
     :doc "UI modules for lsp-mode"
@@ -347,7 +349,12 @@
     :url "https://github.com/lolownia/org-pomodoro"
     :ensure t
     :bind ((org-agenda-mode-map
-            ("S-p" . org-pomodoro)))))
+            ("S-p" . org-pomodoro))))
+  (leaf ox-gfm
+    :doc "Github Flavored Markdown Back-End for Org Export Engine"
+    :tag "github" "markdown" "wp" "org"
+    :added "2021-09-17"
+    :ensure t))
 
 (leaf *python
   :config
@@ -383,6 +390,27 @@
     :added "2020-11-26"
     :emacs>= 24.1
     :ensure t))
+
+(leaf *rust
+  :config
+  (leaf rust-mode
+    :doc "A major-mode for editing Rust source code"
+    :req "emacs-25.1"
+    :tag "languages" "emacs>=25.1"
+    :added "2021-09-30"
+    :url "https://github.com/rust-lang/rust-mode"
+    :emacs>= 25.1
+    :ensure t
+    :custom ((rust-format-on-save . t)))
+  (leaf cargo
+    :doc "Emacs Minor Mode for Cargo, Rust's Package Manager."
+    :req "emacs-24.3" "markdown-mode-2.4"
+    :tag "tools" "emacs>=24.3"
+    :added "2021-09-30"
+    :emacs>= 24.3
+    :ensure t
+    :hook (rust-mode-hook . cargo-minor-mode)
+    :after markdown-mode))
 
 (provide 'init)
 
