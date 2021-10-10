@@ -19,30 +19,46 @@ prompt pure
 bindkey "^P" history-beginning-search-backward
 bindkey "^N" history-beginning-search-forward
 
-# Emacs aliases
+# zsh configure for tramp-mode
+if [[ "$TERM" == "dumb" ]]; then
+  unsetopt zle
+  unsetopt prompt_cr
+  unsetopt prompt_subst
+  unfunction precmd
+  unfunction preexec
+  PS1='$ '
+fi
+
+#
+# Emacs
+#
+
 alias ew="emacsclient -c"
 alias et="emacsclient -nw"
 alias ekill="emacsclient -e '(kill-emacs)'"
 alias edaemon="emacs --daemon"
 
-# "cd .."
-function cdup() {
-  echo
-  cd ..
-  prompt_$(prompt_theme)_precmd
-  zle reset-prompt
-  return 0
-}
-zle -N cdup
-
-# direnv configure
-eval "$(direnv hook zsh)"
+#
+# Python
+#
 
 # pyenv configure
 eval "$(pyenv init -)"
 
 # pipenv dir configure
 export PIPENV_VENV_IN_PROJECT=.
+
+
+#
+# Utils
+#
+
+# Rename serial num
+mvall() {
+  NAME=$1
+  EXT=$2
+  awk '{printf "mv \"%s\" xxx%01d.yyy\n", $0, NR}' | sed "s/xxx/$(echo $NAME)/g" | sed "s/yyy/$(echo $EXT)/g"
+}
 
 # change AWS accounts
 lsAWS() {
@@ -63,21 +79,17 @@ json2yaml() {
   ruby -ryaml -rjson -e 'puts YAML.dump(JSON.parse(STDIN.read))'
 }
 
-# Rename serial num
+#
+# GCloud Tools
+#
 
-mvall() {
-  NAME=$1
-  EXT=$2
-  awk '{printf "mv \"%s\" xxx%01d.yyy\n", $0, NR}' | sed "s/xxx/$(echo $NAME)/g" | sed "s/yyy/$(echo $EXT)/g"
-}
-
-# The next line updates PATH for the Google Cloud SDK.
 if [ -f "$(echo $HOME)/google-cloud-sdk/path.zsh.inc" ]; then . "$(echo $HOME)/google-cloud-sdk/path.zsh.inc"; fi
-
-# The next line enables shell command completion for gcloud.
 if [ -f "$(echo $HOME)/google-cloud-sdk/completion.zsh.inc" ]; then . "$(echo $HOME)/google-cloud-sdk/completion.zsh.inc"; fi
+
+#
+# nvm
+#
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-
 [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
