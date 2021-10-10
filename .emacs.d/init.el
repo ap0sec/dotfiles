@@ -372,7 +372,7 @@
     :added "2021-04-01"
     :ensure t
     :after virtualenvwrapper
-    :hook (python-mode-hook . auto-virtualenvwrapper-activate))
+    :hook ((python-mode-hook . auto-virtualenvwrapper-activate)))
   (leaf py-autopep8
     :doc "Use autopep8 to beautify a Python buffer"
     :url "http://paetzke.me/project/py-autopep8.el"
@@ -409,7 +409,7 @@
     :added "2021-09-30"
     :emacs>= 24.3
     :ensure t
-    :hook (rust-mode-hook . cargo-minor-mode)
+    :hook ((rust-mode-hook . cargo-minor-mode))
     :after markdown-mode))
 
 (provide 'init)
