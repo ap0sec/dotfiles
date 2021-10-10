@@ -30,6 +30,15 @@ if [[ "$TERM" == "dumb" ]]; then
 fi
 
 #
+# sway
+#
+if [[ `hostname` == 'apo-RPi0' ]]; then
+  hostname
+else
+  echo "NG"
+fi
+
+#
 # Emacs
 #
 
