@@ -1,2 +1,6 @@
 .emacs.d/backups/*
 .emacs.d/elpa/*
+.emacs.d/.lsp-session-v1
+.emacs.d/init.elc
+.emacs.d/recentf
+.emacs.d/tramp
