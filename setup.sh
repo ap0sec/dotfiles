@@ -24,3 +24,16 @@ for f in $(ls -1 .zprezto/runcoms); do
     
     ln -snfv ${PWD}/.zprezto/runcoms/"$f" ~/."$f"
 done
+
+#
+# emacs
+#
+
+if type "emacs" > /dev/null 2>&1; then
+    ./emacs_build.sh
+else
+    cat <<EOF
+Emacs not installed.
+After installing thad, exec: ${PWD}/emacs_build.sh
+EOF
+fi
