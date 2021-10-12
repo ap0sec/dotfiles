@@ -412,6 +412,18 @@
     :hook ((rust-mode-hook . cargo-minor-mode))
     :after markdown-mode))
 
+(leaf *docker
+  :config
+  (leaf dockerfile-mode
+    :doc "Major mode for editing Docker's Dockerfiles"
+    :req "emacs-24"
+    :tag "docker" "emacs>=24"
+    :added "2021-10-12"
+    :url "https://github.com/spotify/dockerfile-mode"
+    :emacs>= 24
+    :ensure t)
+  )
+
 (provide 'init)
 
 ;; Local Variables:
