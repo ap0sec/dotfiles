@@ -397,17 +397,16 @@
     :doc "Lightweight auto activate python virtualenvs"
     :req "cl-lib-0.6" "s-1.10.0" "virtualenvwrapper-0"
     :tag "tools" "virtualenv" "python"
-    :added "2021-04-01"
-    :ensure t
-    :after virtualenvwrapper
-    :hook ((python-mode-hook . auto-virtualenvwrapper-activate)))
+    :url "http://github.com/jorgenschaefer/pyvenv"
+    :added "2021-11-24"
+    :ensure t)
   (leaf py-autopep8
     :doc "Use autopep8 to beautify a Python buffer"
     :url "http://paetzke.me/project/py-autopep8.el"
     :ensure t
     :hook (python-mode-hook . py-autopep8-enable-on-save)
     :setq ((py-autopep8-options quote
-                              ("--max-line-length=120")))))
+                                ("--max-line-length=120")))))
 
 (leaf *yaml
   :config
@@ -466,6 +465,18 @@
     :url "https://github.com/spotify/dockerfile-mode"
     :emacs>= 24
     :ensure t))
+
+(leaf *terraform
+  :config
+  (leaf terraform-mode
+    :doc "Major mode for terraform configuration file"
+    :req "emacs-24.3" "hcl-mode-0.3" "dash-2.17.0"
+    :tag "emacs>=24.3"
+    :url "https://github.com/syohex/emacs-terraform-mode"
+    :added "2022-01-05"
+    :emacs>= 24.3
+    :ensure t
+    :after hcl-mode))
 
 (provide 'init)
 

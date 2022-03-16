@@ -89,6 +89,33 @@ json2yaml() {
 }
 
 #
+# DevTools on Docker
+#
+
+# python
+dpython() {
+  if [ -z $AWS_DEFAULT_PROFILE ]; then
+    export AWS_DEFAULT_PROFILE='default'
+  fi
+  docker compose run --rm engine python ${@}
+}
+dpytest() {
+  if [ -z $AWS_DEFAULT_PROFILE ]; then
+    export AWS_DEFAULT_PROFILE='default'
+  fi
+  docker compose run --rm engine pytest ${@}
+}
+
+# sam
+dsam(){
+  if [ -z $AWS_DEFAULT_PROFILE ]; then
+    export AWS_DEFAULT_PROFILE='default'
+  fi
+  docker compose run -v /var/run/docker.sock:/var/run/docker.sock --rm engine sam ${@}
+}
+
+
+#
 # GCloud Tools
 #
 
