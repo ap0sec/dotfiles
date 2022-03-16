@@ -170,7 +170,6 @@
   (doom-modeline-mu4e . nil)
   (doom-modeline-irc . nil))
 
-
 (leaf ivy
   :doc "Incremental Vertical completYon"
   :req "emacs-24.5"
@@ -275,7 +274,8 @@
            (highlight-indent-guides-method . 'character))
   :hook ((yaml-mode-hook . highlight-indent-guides-mode)
          (python-mode-hook . highlight-indent-guides-mode)
-         (emacs-lisp-mode-hook . highlight-indent-guides-mode)))
+         (emacs-lisp-mode-hook . highlight-indent-guides-mode)
+         (web-mode-hook . highlight-indent-guides-mode)))
 
 (leaf git-gutter
   :bind (("C-c g" . hydra-git-gutter/body))
@@ -356,8 +356,36 @@
     :added "2021-09-17"
     :ensure t))
 
+(leaf *webs
+  :config
+  (leaf web-mode
+    :doc "major mode for editing web templates"
+    :req "emacs-23.1"
+    :tag "languages" "emacs>=23.1"
+    :url "https://web-mode.org"
+    :added "2022-03-16"
+    :emacs>= 23.1
+    :ensure t
+    :mode "\\.js\\'" "\\.ts\\'" "\\.jsx\\'" "\\.tsx\\'"
+    :config
+    (setq web-mode-code-indent-offset 2)
+    (setq web-mode-css-indent-offset 2)
+    (setq web-mode-markup-indent-offset 2))
+  (prog1 'web-mode
+    (autoload #'web-mode "web-mode" nil t)
+    (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.ts\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))))
+
 (leaf *python
   :config
+  (leaf pyvenv
+    :doc "Python virtual environment interface"
+    :tag "tools" "virtualenv" "python"
+    :url "http://github.com/jorgenschaefer/pyvenv"
+    :added "2021-10-13"
+    :ensure t)
   (leaf virtualenvwrapper
     :doc "a featureful virtualenv tool for Emacs"
     :req "dash-1.5.0" "s-1.6.1"
@@ -412,6 +440,22 @@
     :hook ((rust-mode-hook . cargo-minor-mode))
     :after markdown-mode))
 
+(leaf *golang
+  :config
+  (leaf go-mode
+    :doc "Major mode for the Go programming language"
+    :tag "go" "languages"
+    :url "https://github.com/dominikh/go-mode.el"
+    :added "2021-10-16"
+    :ensure t)
+  (leaf company-go
+    :doc "company-mode backend for Go (using gocode)"
+    :req "company-0.8.0" "go-mode-1.0.0"
+    :tag "languages"
+    :added "2021-10-16"
+    :ensure t
+    :after company go-mode))
+
 (leaf *docker
   :config
   (leaf dockerfile-mode
@@ -421,8 +465,7 @@
     :added "2021-10-12"
     :url "https://github.com/spotify/dockerfile-mode"
     :emacs>= 24
-    :ensure t)
-  )
+    :ensure t))
 
 (provide 'init)
 
