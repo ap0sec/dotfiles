@@ -30,15 +30,6 @@ if [[ "$TERM" == "dumb" ]]; then
 fi
 
 #
-# sway
-#
-if [[ `hostname` == 'apo-RPi0' ]]; then
-  if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-    exec sway
-  fi
-fi
-
-#
 # Emacs
 #
 
@@ -46,6 +37,7 @@ alias ew="emacsclient -c"
 alias et="emacsclient -nw"
 alias ekill="emacsclient -e '(kill-emacs)'"
 alias edaemon="emacs --daemon"
+alias eopen="emacsclient -n"
 
 #
 # Python
@@ -57,6 +49,10 @@ eval "$(pyenv init -)"
 # pipenv dir configure
 export PIPENV_VENV_IN_PROJECT=.
 
+#
+# Git
+#
+export GIT_PAGER=cat
 
 #
 # Utils
@@ -138,3 +134,35 @@ export PATH="$GOENV_ROOT/bin:$PATH"
 eval "$(goenv init -)"
 export PATH="$GOROOT/bin:$PATH"
 export PATH="$PATH:$GOPATH/bin"
+
+#
+# PostgreSQL
+#
+export PATH="/usr/local/opt/libpq/bin:$PATH"
+
+#
+# ghq + peco
+#
+bindkey "^]" peco-src
+function peco-src () {
+  local selected_dir=$(ghq list -p | peco --query "$LBUFFER")
+  if [ -n "$selected_dir" ]; then
+    BUFFER="cd ${selected_dir}"
+    zle accept-line
+  fi
+  zle clear-screen
+}
+zle -N peco-src
+
+bindkey '^[' peco-git-checkout
+function peco-git-checkout () {
+    git fetch -p
+    local selected_branch=$(git branch --list -a --no-color | grep remote | sed -e 's/remotes\/origin\///g' | colrm 1 2 | peco)
+    echo ${selected_branch}
+    if [ -n "$selected_branch" ]; then
+    BUFFER="git checkout ${selected_branch}"
+    zle accept-line
+    fi
+    zle clear-screen
+}
+zle -N peco-git-checkout

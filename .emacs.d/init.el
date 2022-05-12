@@ -376,7 +376,10 @@
     (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
     (add-to-list 'auto-mode-alist '("\\.ts\\'" . web-mode))
     (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))))
+    (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode)))
+  (leaf emacs-prisma-mode
+    :load-path "~/.emacs.d/elisp/emacs-prisma-mode/prisma-mode.el"
+    :require t))
 
 (leaf *python
   :config
